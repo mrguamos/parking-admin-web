@@ -1,0 +1,43 @@
+{
+	"compilerOptions": {
+		"composite": true,
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+		"target": "ES2020",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"skipLibCheck": true,
+
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"moduleDetection": "force",
+		"noEmit": true,
+		"jsx": "preserve",
+
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+
+		"paths": {
+			"@assets/*": ["./src/assets/*"],
+			"@styles/*": ["./src/styles/*"],
+			"@apis/*": ["./src/app/apis/*"],
+			"@components/*": ["./src/app/components/*"],
+			"@constants/*": ["./src/app/constants/*"],
+			"@hooks/*": ["./src/app/hooks/*"],
+			"@models/*": ["./src/app/models/*"],
+			"@routers/*": ["./src/app/routers/*"],
+			"@stores/*": ["./src/app/stores/*"],
+			"@services/*": ["./src/app/services/*"],
+			"@utils/*": ["./src/app/utils/*"],
+			"@views/*": ["./src/app/views/*"],
+			"@/*": ["./src/app/*"]
+		}
+	},
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts","types/*.d.ts"]
+}

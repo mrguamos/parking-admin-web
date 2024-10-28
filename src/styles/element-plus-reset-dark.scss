@@ -1,0 +1,111 @@
+html.dark .el-card {
+    --el-card-bg-color: var(--el-bg-color-overlay)
+}
+
+html.dark .el-empty {
+    --el-empty-fill-color-0: var(--el-color-black);
+    --el-empty-fill-color-1: #4b4b52;
+    --el-empty-fill-color-2: #36383d;
+    --el-empty-fill-color-3: #1e1e20;
+    --el-empty-fill-color-4: #262629;
+    --el-empty-fill-color-5: #202124;
+    --el-empty-fill-color-6: #212224;
+    --el-empty-fill-color-7: #1b1c1f;
+    --el-empty-fill-color-8: #1c1d1f;
+    --el-empty-fill-color-9: #18181a
+}
+
+// 暗黑主题
+.dark {
+	// 表格
+	.el-table.el-table--border {
+		border: 1px solid;
+		@apply border-black-100;
+
+		td {
+			@apply bg-black-400 border-b border-solid border-black-100;
+		}
+
+		&:after,
+		.el-table__inner-wrapper::before {
+			@apply bg-black-100;
+		}
+
+		th.el-table__cell.is-leaf {
+			height: 52px;
+			border-bottom: 1px solid;
+			@apply bg-black-200 border-black-400;
+			.cell {
+				@apply text-gray-300;
+			}
+		}
+		.el-table__cell {
+			// 单元格
+			.cell {
+				@apply text-white-100;
+			}
+		}
+	}
+
+	// 选项卡
+	.el-tabs {
+		.el-tabs__header {
+			@apply bg-[#202020];
+			.el-tabs__nav-wrap {
+				&::after {
+					@apply bg-gray-900;
+				}
+			}
+		}
+	}
+
+	// 切换开管相关初始化
+	.el-switch {
+		.el-switch__core {
+			@apply bg-night-400;
+			.el-switch__action {
+				@apply bg-black-50;
+			}
+		}
+		&.is-checked {
+			.el-switch__core {
+				@apply bg-purple-500 border-purple-500;
+			}
+		}
+	}
+
+	// 步骤条相关初始化
+	.el-steps--horizontal {
+		.el-step {
+			&.is-horizontal {
+				.el-step__head {
+					&.is-process {
+						@apply text-white-100;
+						.el-step__icon.is-text {
+							@apply border-white-100;
+						}
+					}
+				}
+				.el-step__main {
+					.el-step__title {
+						&.is-process {
+							@apply text-white-100;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// 表格编辑/新增表单场景样式
+	.table-from {
+		.el-form--label-top .el-form-item .el-form-item__label {
+			@apply text-gray-100;
+		}
+	}
+
+	// 自定义下拉框
+	.el-dropdown-menu {
+		@apply text-white-100 bg-black-50;
+	}
+}

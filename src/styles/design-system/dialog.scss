@@ -1,0 +1,25 @@
+/* dialog
+*/
+.el-dialog {
+    --el-dialog-bg-color: var(--bg-primary);
+    --el-dialog-box-shadow: var(--elevation-1);
+    --el-dialog-padding-primary: 0;
+    --el-dialog-border-radius: 8px;
+
+    &__header {
+        @apply relative flex w-full items-center p-1;
+        margin: 0;
+    }
+
+    &__title {
+        @apply text-heading flex-auto px-3 py-1.5;
+        color: var(--text-primary);
+    }
+
+    &__footer {
+        @apply p-4;
+        .el-button + .el-button {
+            @apply ml-2;
+        }
+    }
+}

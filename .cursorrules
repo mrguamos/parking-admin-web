@@ -1,0 +1,85 @@
+You are an expert in TypeScript, Node.js, Vite, Vue.js, Vue Router, Pinia, VueUse, ElementPlus, and Tailwind, with a deep understanding of best practices and performance optimization techniques in these technologies.
+
+When evaluating prompts and making changes to the codebase, please consider the following instructions for context:
+
+Code Style and Structure
+
+- Write concise, maintainable, and technically accurate TypeScript code with relevant examples.
+- Use functional and declarative programming patterns; avoid classes.
+- Favor iteration and modularization to adhere to DRY principles and avoid code duplication.
+- Organize files systematically: each file should contain only related content, such as exported components, subcomponents, helpers, static content, and types.
+- One business function, one folder, and there can be list.vue, detail.vue and other components in the folder according to the function. In the business function folder, do not name it index.vue component. Prefix the name with its business function. example: `customers-list.vue`
+- Shared components should be placed in `src/app/components/global`
+
+  Naming Conventions
+
+- Use lowercase with dashes for directories (e.g., components/auth-wizard).
+- Favor named exports for functions.
+- Naming of methods or function should follow the verb + noun format. example: `function showDialog() {}`
+- Use kebab-case for file names. example: `user-profile.vue`
+- In SFC, use PascalCase when importing, and kebab-case when using in templates
+
+  TypeScript Usage
+
+- Use TypeScript for all code; prefer interfaces over types.
+- Try to declare the types of variables and parameters, and try not to use `any`.
+- When defining the interface of variables and parameters, start with `I`. example: `interface IUser { name: string }`
+
+  Syntax and Formatting
+
+- Use the "function" keyword for pure functions.
+- Always use the Vue Composition API script setup style.
+- Methods should follow the single responsibility principle as much as possible
+- If it is a hook, use the `use` word as a prefix
+- When using Promise, try to use `await`.
+- The code in a component should not exceed 500 lines. If it exceeds, consider componentization, extract some content into sub-components, and extract some js methods into hooks or ordinary util functions
+- Use the following relative paths when importing files:
+
+  - `@/` -> `src/app/`
+  - `@assets/` -> `src/assets/`
+  - `@styles/` -> `src/styles/`
+  - `@apis/` -> `src/app/apis/`
+  - `@components/` -> `src/app/components/`
+  - `@constants/` -> `src/app/constants/`
+  - `@hooks/` -> `src/app/hooks/`
+  - `@models/` -> `src/app/models/`
+  - `@routers/` -> `src/app/routers/`
+  - `@stores/` -> `src/app/stores/`
+  - `@services/` -> `src/app/services/`
+  - `@utils/` -> `src/app/utils/`
+  - `@views/` -> `src/app/views/`
+
+  UI and Styling
+
+- Use ElementPlus and TailwindCSS for components and styling.
+- There is no need to import ElementPlus components when using in templates as they have already been made available globally.
+- Implement responsive design with TailwindCSS; use a mobile-first approach.
+- Use kebab-case naming rule for style classes
+- Avoid using inline styles
+- Use scss when using scoped styling on a component
+- Global styles should be placed in `src/app/styles/global.scss`
+- Component specific styles especially for ElementPlus components should be placed in `src/app/styles/design-system/{component_name}.scss`
+- Prefer using the pre-defined classes from ElementPlus when overriding styles. If you are unfamiliar with the classes please let me know so that I can point you to the correct documentation.
+- Use Material Icons instead of ElementPlus icons
+- Pass the icon directly to the component's icon prop (if available) using Vue's h render function
+- Use the appropriate Material Icons class, prioritizing them in this order:
+  - material-icons-outlined
+  - material-icons-round
+  - material-symbols-outlined
+  - material-symbols-rounded
+- Use a span tag to display the icon. example: `<span class="{icon_class}">{icon_name}</span>`
+- If the icon does not exist from the ones provided, just use "icon_name" as the content of the span tag
+- Use `white-1000` as alternative for `white`
+- Use `black-1000` as alternative for `black`
+
+  Performance Optimization
+
+- Use VueUse functions where applicable.
+- Wrap asynchronous components in Suspense with a fallback UI.
+- Use dynamic loading for non-critical components.
+- Optimize images: use WebP format, include size data, implement lazy loading.
+- Implement an optimized chunking strategy during the Vite build process, such as code splitting, to generate smaller bundle sizes.
+
+  General Rule
+
+- If you are unsure about something or is lacking context, just tell me so I can provide you with the necessary information if possible.

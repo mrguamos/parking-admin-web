@@ -1,0 +1,49 @@
+/* progress */
+.el-progress {
+    &__text {
+        text-align: right;
+    }
+
+    &-bar {
+        &__outer {
+            overflow: visible;
+            background-color: var(--bg-brand-tertiary);
+        }
+
+        &__inner {
+            background-color: var(--bg-brand-primary);
+        }
+
+        &__innerText {
+            margin: 0;
+            min-width: 40px;
+        }
+    }
+
+    &.is-success {
+        .el-progress-bar__outer {
+            background-color: var(--bg-positive-tertiary);
+        }
+        .el-progress-bar__inner {
+            background-color: var(--bg-positive-primary);
+        }
+    }
+
+    &.is-warning {
+        .el-progress-bar__outer {
+            background-color: var(--bg-warning-tertiary);
+        }
+        .el-progress-bar__inner {
+            background-color: var(--bg-warning-primary);
+        }
+    }
+
+    &.is-exception {
+        .el-progress-bar__outer {
+            background-color: var(--bg-danger-tertiary);
+        }
+        .el-progress-bar__inner {
+            background-color: var(--bg-danger-primary);
+        }
+    }
+}

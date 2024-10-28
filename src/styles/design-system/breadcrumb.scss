@@ -1,0 +1,12 @@
+.el-breadcrumb {
+    &__inner {
+        @apply text-body;
+        a,
+        &.is-link {
+            @apply text-body-strong;
+        }
+    }
+    &__separator {
+        font-weight: 400;
+    }
+}

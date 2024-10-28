@@ -1,0 +1,8 @@
+.el-segmented {
+    --el-segmented-bg-color: var(--bg-primary);
+    --el-segmented-item-selected-color: var(--text-on-brand);
+    --el-segmented-item-selected-bg-color: var(--el-color-primary);
+    --el-segmented-item-selected-disabled-bg-color: var(--bg-disabled);
+    @apply text-small rounded-lg;
+    min-height: 36px;
+}

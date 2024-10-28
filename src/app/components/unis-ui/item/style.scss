@@ -1,0 +1,34 @@
+/* tailwind css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@styles/design-system/color';
+@import '@styles/design-system/typography';
+/* components */
+@import '@styles/design-system/badge';
+@import '@styles/design-system/tag';
+@import '@styles/design-system/avatar';
+@import '@styles/design-system/button';
+@import '@styles/design-system/checkbox';
+@import '@styles/design-system/radio';
+@import '@styles/design-system/input';
+@import '@styles/design-system/stepper';
+@import '@styles/design-system/slider';
+@import '@styles/design-system/switch';
+@import '@styles/design-system/collapse';
+@import '@styles/design-system/pagination';
+@import '@styles/design-system/table';
+@import '@styles/design-system/date-picker';
+@import '@styles/design-system/rate';
+@import '@styles/design-system/upload';
+@import '@styles/design-system/carousel';
+@import '@styles/design-system/dialog';
+@import '@styles/design-system/info-box';
+@import '@styles/design-system/tabs';
+@import '@styles/design-system/menu';
+@import '@styles/design-system/transfer';
+
+/* global */
+@import '@styles/global.scss';
+@import '@styles/mixins';

@@ -1,0 +1,196 @@
+// 弹窗相关初始化
+.el-dialog {
+	border-radius: 8px !important;
+
+	.el-dialog__header {
+		padding: 24px;
+		margin-right: 0;
+		border-bottom: 0px;
+
+		.el-dialog__title {
+			font-size: 24px;
+		}
+
+		.el-dialog__headerbtn {
+			top: 13px;
+			right: 10px;
+			.el-dialog__close {
+				@apply text-2xl text-white-100;
+			}
+		}
+	}
+	.el-dialog__body {
+		@apply overflow-auto;
+	}
+}
+
+// 表格相关初始化
+
+/* 设置圆角以及边框颜色 */
+.el-table.el-table--border {
+	border-radius: 10px 10px 0 0;
+	border: 1px solid;
+	@apply border-gray-100;
+
+	td,
+	th.is-leaf {
+		border-bottom: 1px solid;
+		@apply border-gray-100;
+	}
+
+	.el-table__body-wrapper {
+		border-right: 0;
+		border-bottom: 0;
+	}
+
+	.el-table__border-left-patch,
+	.el-table--border::before,
+	.el-table--border .el-table__inner-wrapper::after {
+		background-color: transparent !important;
+	}
+
+	&:after,
+	.el-table__inner-wrapper::before {
+		@apply bg-gray-100;
+	}
+
+	.el-table__header th.el-table__cell.is-leaf {
+		height: 52px;
+		border-bottom: 1px solid;
+		@apply border-gray-100 bg-gray-50;
+		.cell {
+			@apply text-gray-700 text-sm not-italic font-normal leading-5;
+		}
+	}
+	// 单元格 隐藏竖线
+	.el-table__cell {
+		border-right: none !important;
+		// 单元格
+		.cell {
+			@apply text-sm not-italic font-medium leading-5;
+		}
+	}
+}
+
+// 分页相关初始化
+.el-pagination {
+	margin-top: 12px;
+	float: right;
+}
+
+// 选项卡相关初始化
+.el-tabs {
+	.el-tabs__header {
+		@apply m-0;
+		.el-tabs__active-bar {
+			@apply box-content bg-purple-400 -left-8 px-8;
+		}
+		.el-tabs__item.is-active {
+			@apply text-purple-400;
+		}
+		.el-tabs__item {
+			@apply px-8 h-[48px] text-gray-500;
+			&:nth-child(2) {
+				@apply px-8;
+			}
+		}
+	}
+}
+
+// 切换开管相关初始化
+.el-switch {
+	.el-switch__core {
+		@apply border-transparent;
+	}
+	&.is-checked {
+		.el-switch__core {
+			@apply bg-purple-400 border-purple-400;
+		}
+	}
+}
+
+// 日期选择相关初始化
+.el-date-editor {
+	&.el-input {
+		width: 100%;
+	}
+}
+
+// 步骤条相关初始化
+.el-steps--horizontal {
+	@apply h-8;
+	.el-step {
+		&.is-horizontal {
+			@apply flex items-center basis-0 text-gray-500;
+			.el-step__head {
+				@apply w-auto;
+				.el-step__line {
+					@apply hidden;
+				}
+				.el-step__icon {
+					@apply w-8 h-8;
+				}
+				&.is-process {
+					@apply text-purple-400;
+					.el-step__icon.is-text {
+						@apply border-purple-400;
+					}
+				}
+			}
+			.el-step__main {
+				@apply whitespace-nowrap -mt-1;
+				.el-step__title {
+					@apply ml-2 font-medium leading-5;
+					&.is-process {
+						@apply text-purple-400;
+					}
+				}
+			}
+			&:not(:last-child)::after {
+				content: '>';
+				@apply px-5 font-bold text-inherit;
+			}
+		}
+	}
+}
+
+// 表单场景样式
+.el-form {
+	@apply w-full;
+}
+
+// 消息提示场景样式
+.el-alert {
+	@apply px-4 py-3;
+	.el-alert__title {
+		@apply text-sm font-normal leading-5;
+	}
+	.el-alert__close-btn {
+		@apply text-2xl top-[10px];
+	}
+	&.el-alert--info {
+		&.is-light {
+			@apply bg-purple-900;
+			.el-alert__close-btn {
+				@apply text-white-100;
+			}
+		}
+		.el-alert__title {
+			@apply text-white-100;
+		}
+	}
+}
+
+// 自定义下拉框
+.el-dropdown{
+	.el-tooltip__trigger:focus-visible {
+		outline: unset;
+	}
+}
+.el-dropdown-menu {
+	.el-dropdown-menu__item {
+		&:not(.is-disabled):focus {
+			@apply text-purple-400;
+		}
+	}
+}

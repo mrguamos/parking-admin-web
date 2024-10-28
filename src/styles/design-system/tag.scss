@@ -1,0 +1,195 @@
+/* tag
+*/
+.el-tag {
+    @apply px-[7px] py-[1px] h-auto rounded-sm;
+
+    &__content {
+        @apply flex items-center gap-1 text-tiny-uppercase;
+
+        .el-icon {
+            @apply rounded-none cursor-default w-4 h-4;
+        }
+    }
+
+    & &__close {
+        @apply ml-1;
+        color: inherit;
+
+        &:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+    }
+
+    &--primary {
+        &.el-tag--dark {
+            --el-tag-border-color: var(--border-brand-primary);
+            --el-tag-bg-color: var(--bg-brand-primary);
+            --el-tag-hover-color: var(--bg-brand-primary-hover);
+            --el-tag-text-color: var(--text-on-brand);
+        }
+
+        &.el-tag--light {
+            --el-tag-border-color: var(--border-brand-secondary);
+            --el-tag-bg-color: var(--bg-brand-secondary);
+            --el-tag-hover-color: var(--bg-brand-secondary-hover);
+            --el-tag-text-color: var(--text-primary);
+        }
+
+        &.el-tag--plain {
+            --el-tag-border-color: var(--border-brand-tertiary);
+            --el-tag-bg-color: var(--bg-brand-tertiary);
+            --el-tag-hover-color: var(--bg-brand-tertiary-hover);
+            --el-tag-text-color: var(--text-primary);
+        }
+    }
+
+    &--success {
+        &.el-tag--dark {
+            --el-tag-border-color: var(--border-positive-primary);
+            --el-tag-bg-color: var(--bg-positive-primary);
+            --el-tag-text-color: var(--text-on-positive-primary);
+            --el-tag-hover-color: var(--bg-positive-primary-hover);
+        }
+
+        &.el-tag--light {
+            --el-tag-border-color: var(--border-positive-secondary);
+            --el-tag-bg-color: var(--bg-positive-secondary);
+            --el-tag-text-color: var(--text-on-positive-secondary);
+            --el-tag-hover-color: var(--bg-positive-secondary-hover);
+        }
+
+        &.el-tag--plain {
+            --el-tag-border-color: var(--border-positive-tertiary);
+            --el-tag-bg-color: var(--bg-positive-tertiary);
+            --el-tag-text-color: var(--text-on-positive-tertiary);
+            --el-tag-hover-color: var(--bg-positive-tertiary-hover);
+        }
+    }
+
+    &--warning {
+        &.el-tag--dark {
+            --el-tag-border-color: var(--border-warning-primary);
+            --el-tag-bg-color: var(--bg-warning-primary);
+            --el-tag-text-color: var(--text-on-warning-primary);
+            --el-tag-hover-color: var(--bg-warning-primary-hover);
+        }
+
+        &.el-tag--light {
+            --el-tag-border-color: var(--border-warning-secondary);
+            --el-tag-bg-color: var(--bg-warning-secondary);
+            --el-tag-text-color: var(--text-on-warning-secondary);
+            --el-tag-hover-color: var(--bg-warning-secondary-hover);
+        }
+
+        &.el-tag--plain {
+            --el-tag-border-color: var(--border-warning-tertiary);
+            --el-tag-bg-color: var(--bg-warning-tertiary);
+            --el-tag-text-color: var(--text-on-warning-tertiary);
+            --el-tag-hover-color: var(--bg-warning-tertiary-hover);
+        }
+    }
+
+    &--danger {
+        &.el-tag--dark {
+            --el-tag-border-color: var(--border-danger-primary);
+            --el-tag-bg-color: var(--bg-danger-primary);
+            --el-tag-text-color: var(--text-on-danger-primary);
+            --el-tag-hover-color: var(--bg-danger-primary-hover);
+        }
+
+        &.el-tag--light {
+            --el-tag-border-color: var(--border-danger-secondary);
+            --el-tag-bg-color: var(--bg-danger-secondary);
+            --el-tag-text-color: var(--text-on-danger-secondary);
+            --el-tag-hover-color: var(--bg-danger-secondary-hover);
+        }
+
+        &.el-tag--plain {
+            --el-tag-border-color: var(--border-danger-tertiary);
+            --el-tag-bg-color: var(--bg-danger-tertiary);
+            --el-tag-text-color: var(--text-on-danger-tertiary);
+            --el-tag-hover-color: var(--bg-danger-tertiary-hover);
+        }
+    }
+
+    &--info {
+        &.el-tag--dark {
+            --el-tag-border-color: var(--border-primary);
+            --el-tag-bg-color: var(--bg-primary);
+            --el-tag-text-color: var(--text-primary);
+            --el-tag-hover-color: var(--bg-primary-hover);
+        }
+
+        &.el-tag--light {
+            --el-tag-border-color: var(--border-secondary);
+            --el-tag-bg-color: var(--bg-secondary);
+            --el-tag-text-color: var(--text-primary);
+            --el-tag-hover-color: var(--bg-secondary-hover);
+        }
+
+        &.el-tag--plain {
+            --el-tag-border-color: var(--border-tertiary);
+            --el-tag-bg-color: var(--bg-tertiary);
+            --el-tag-text-color: var(--text-primary);
+            --el-tag-hover-color: var(--bg-tertiary-hover);
+        }
+    }
+}
+
+.el-check-tag {
+    @apply flex items-center justify-center gap-2 py-2 px-4 text-small;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    .el-icon {
+        @apply w-4 h-4 text-body;
+        .is-active {
+            display: none;
+        }
+    }
+    &.is-checked {
+        &.el-check-tag--primary {
+            background-color: var(--bg-brand-primary);
+            color: var(--text-on-brand);
+            &:hover {
+                background-color: var(--bg-brand-primary-hover);
+            }
+        }
+        &.el-check-tag--success {
+            background-color: var(--bg-positive-primary);
+            color: var(--text-on-positive-primary);
+            &:hover {
+                background-color: var(--bg-positive-primary-hover);
+            }
+        }
+        &.el-check-tag--warning {
+            background-color: var(--bg-warning-primary);
+            color: var(--text-on-warning-primary);
+            &:hover {
+                background-color: var(--bg-warning-primary-hover);
+            }
+        }
+        &.el-check-tag--danger {
+            background-color: var(--bg-danger-primary);
+            color: var(--text-on-danger-primary);
+            &:hover {
+                background-color: var(--bg-danger-primary-hover);
+            }
+        }
+        &.el-check-tag--info {
+            background-color: var(--bg-positive-secondary);
+            color: var(--text-primary);
+            &:hover {
+                background-color: var(--bg-positive-secondary-hover);
+            }
+        }
+        .el-icon {
+            .is-inactive {
+                display: none;
+            }
+            .is-active {
+                display: inline-block;
+            }
+        }   
+    }
+}

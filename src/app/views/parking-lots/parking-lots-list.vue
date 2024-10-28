@@ -5,9 +5,16 @@ interface IParkingLot {
   id: number;
   name: string;
   address: string;
-  capacity: number;
-  available: number;
-  status: string;
+  city: string;
+  zipCode: string;
+  state: string;
+  spots: number;
+  rates: {
+    hourly: boolean;
+    daily: boolean;
+    weekly: boolean;
+    monthly: boolean;
+  };
 }
 
 const tableData = ref<IParkingLot[]>([
@@ -30,9 +37,10 @@ const tableData = ref<IParkingLot[]>([
 ]);
 
 const loading = ref(false);
+const dialogVisible = ref(false);
 
 const handleAdd = () => {
-  // Add parking lot logic
+  dialogVisible.value = true;
 };
 
 const handleEdit = (row: IParkingLot) => {
@@ -105,5 +113,55 @@ const handleDelete = (row: IParkingLot) => {
         </el-card>
       </div>
     </el-card>
+
+    <el-dialog
+      v-model="dialogVisible"
+      title="Create Parking Lot"
+      width="500px"
+    >
+      <div class="p-6">
+        <el-form label-position="top">
+          <div class="mb-6">
+            <h3 class="text-xs font-medium uppercase text-gray-500 mb-4">LOCATION</h3>
+            <el-form-item>
+              <el-input placeholder="Name" />
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="Address" />
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="City" />
+            </el-form-item>
+            <el-form-item>
+              <el-input placeholder="Zip Code" />
+            </el-form-item>
+            <el-form-item>
+              <el-select class="w-full" placeholder="State">
+                <el-option label="California" value="CA" />
+                <el-option label="New York" value="NY" />
+                <!-- Add more states as needed -->
+              </el-select>
+            </el-form-item>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-medium uppercase text-gray-500 mb-4">PREFERENCES</h3>
+            <el-form-item>
+              <el-input placeholder="Number of Spots" />
+            </el-form-item>
+            <div class="space-y-2">
+              <el-checkbox label="Hourly Rate" />
+              <el-checkbox label="Daily Rate" />
+              <el-checkbox label="Weekly Rate" />
+              <el-checkbox label="Monthly Rate" />
+            </div>
+          </div>
+        </el-form>
+      </div>
+      <template #footer>
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary">Create</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>

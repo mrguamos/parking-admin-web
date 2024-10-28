@@ -6,9 +6,7 @@
 			<div class="logo-top flex items-center gap-1 text-tiny-uppercase">
 				<logo class="text-brand-foreground"></logo>
 				<div v-if="!isCollapse" class="logo-info">
-					UNIS
-					<br />
-					Design System
+					Cubework Parking
 				</div>
 			</div>
 			<div>

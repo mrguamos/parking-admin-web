@@ -69,7 +69,11 @@
 		"Information_Box": "Information Box",
 		"Tooltip": "Tooltip",
 		"Others": "Others",
-		"Divider": "Divider"
+		"Divider": "Divider",
+		"Settings": "Settings",
+		"Home": "Home",
+		"Parking_Lots": "Parking Lots",
+		"Reservations": "Reservations"
 	},
 	"login": {
 		"User_Name": "User Name",

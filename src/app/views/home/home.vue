@@ -40,28 +40,28 @@ const activeReservations = ref<IReservation[]>([
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <el-card class="h-full">
         <div class="flex flex-col">
-          <div class="text-sm text-secondary mb-2">Open Spots</div>
+          <div class="text-sm  mb-2">Open Spots</div>
           <div class="text-2xl font-semibold">{{ statistics.openSpots }}</div>
         </div>
       </el-card>
 
       <el-card class="h-full">
         <div class="flex flex-col">
-          <div class="text-sm text-secondary mb-2">Booked Spots</div>
+          <div class="text-sm  mb-2">Booked Spots</div>
           <div class="text-2xl font-semibold">{{ statistics.bookedSpots }}</div>
         </div>
       </el-card>
 
       <el-card class="h-full">
         <div class="flex flex-col">
-          <div class="text-sm text-secondary mb-2">Today's Reservations</div>
+          <div class="text-sm  mb-2">Today's Reservations</div>
           <div class="text-2xl font-semibold">{{ statistics.todaysReservations }}</div>
         </div>
       </el-card>
 
       <el-card class="h-full">
         <div class="flex flex-col">
-          <div class="text-sm text-secondary mb-2">Today's Revenue</div>
+          <div class="text-sm  mb-2">Today's Revenue</div>
           <div class="text-2xl font-semibold">{{ statistics.todaysRevenue }}</div>
         </div>
       </el-card>

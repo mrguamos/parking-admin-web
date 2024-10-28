@@ -2,76 +2,91 @@
 import { ref } from 'vue';
 
 interface IReservation {
-  id: number;
-  parkingLot: string;
-  startTime: string;
-  endTime: string;
-  status: string;
-  user: string;
+  licensePlate: string;
+  title: string;
+  duration: string;
+  date: string;
+  total: number;
 }
 
-const tableData = ref<IReservation[]>([]);
+const activeReservations = ref<IReservation[]>([
+  {
+    licensePlate: 'JKK12523423',
+    title: 'Cbwork Walnut',
+    duration: '2 Hours',
+    date: '5/14/2024 10:10 AM',
+    total: 20
+  },
+  {
+    licensePlate: 'JKK12523423',
+    title: 'Cbwork Walnut',
+    duration: '2 Hours',
+    date: '5/14/2024 10:10 AM',
+    total: 20
+  },
+  {
+    licensePlate: 'JKK12523423',
+    title: 'Cbwork Walnut',
+    duration: '2 Hours',
+    date: '5/14/2024 10:10 AM',
+    total: 20
+  }
+]);
+
 const loading = ref(false);
-
-const handleAdd = () => {
-  // Add reservation logic
-};
-
-const handleEdit = (row: IReservation) => {
-  // Edit reservation logic
-};
-
-const handleCancel = (row: IReservation) => {
-  // Cancel reservation logic
-};
 </script>
 
 <template>
-  <div class="reservations-container">
+  <div class="p-4">
     <el-card class="w-full">
       <template #header>
-        <div class="flex justify-between items-center">
-          <div class="flex items-center">
-            <span class="material-icons-outlined mr-2">calendar_month</span>
-            <span>Reservations</span>
-          </div>
-          <el-button type="primary" @click="handleAdd">
-            <span class="material-icons-outlined mr-1">add</span>
-            New Reservation
-          </el-button>
+        <div class="flex items-center">
+          <el-tabs>
+            <el-tab-pane label="Active" />
+            <el-tab-pane label="History" />
+          </el-tabs>
         </div>
       </template>
 
-      <el-table
-        v-loading="loading"
-        :data="tableData"
-        border
-        style="width: 100%"
-      >
-        <el-table-column prop="parkingLot" label="Parking Lot" />
-        <el-table-column prop="startTime" label="Start Time" width="180" />
-        <el-table-column prop="endTime" label="End Time" width="180" />
-        <el-table-column prop="user" label="User" />
-        <el-table-column prop="status" label="Status" width="120">
-          <template #default="{ row }">
-            <el-tag :type="row.status === 'Active' ? 'success' : 'info'">
-              {{ row.status }}
-            </el-tag>
+      <div class="flex flex-col gap-4">
+        <el-input
+          placeholder="Search"
+          class="w-full"
+        >
+          <template #prefix>
+            <span class="material-icons-outlined">search</span>
           </template>
-        </el-table-column>
-        <el-table-column label="Actions" width="150" fixed="right">
-          <template #default="{ row }">
-            <el-button-group>
-              <el-button type="primary" @click="handleEdit(row)">
-                <span class="material-icons-outlined">edit</span>
-              </el-button>
-              <el-button type="danger" @click="handleCancel(row)">
-                <span class="material-icons-outlined">cancel</span>
-              </el-button>
-            </el-button-group>
-          </template>
-        </el-table-column>
-      </el-table>
+        </el-input>
+
+        <el-card 
+          v-for="reservation in activeReservations" 
+          :key="reservation.licensePlate"
+          class="bg-primary"
+        >
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <div class="mb-2">License Plate</div>
+              <div>{{ reservation.licensePlate }}</div>
+            </div>
+            <div>
+              <div class="mb-2">Title</div>
+              <div>{{ reservation.title }}</div>
+            </div>
+            <div>
+              <div class="mb-2">Duration</div>
+              <div>{{ reservation.duration }}</div>
+            </div>
+            <div>
+              <div class="mb-2">Date</div>
+              <div>{{ reservation.date }}</div>
+            </div>
+            <div>
+              <div class="mb-2">Total</div>
+              <div>${{ reservation.total }}</div>
+            </div>
+          </div>
+        </el-card>
+      </div>
     </el-card>
   </div>
 </template>

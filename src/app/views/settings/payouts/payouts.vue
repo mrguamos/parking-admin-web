@@ -83,17 +83,19 @@ function handleAddMethod() {
       title="Add Payout Method"
       width="500px"
     >
-      <el-form label-position="top">
-        <el-form-item label="Method Type">
-          <el-select class="w-full">
-            <el-option label="Bank Account" value="bank" />
-            <el-option label="PayPal" value="paypal" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Account Details">
-          <el-input />
-        </el-form-item>
-      </el-form>
+      <div class="p-6">
+        <el-form label-position="top">
+          <el-form-item label="Method Type">
+            <el-select class="w-full">
+              <el-option label="Bank Account" value="bank" />
+              <el-option label="PayPal" value="paypal" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Account Details">
+            <el-input />
+          </el-form-item>
+        </el-form>
+      </div>
       <template #footer>
         <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleAddMethod">Add Method</el-button>

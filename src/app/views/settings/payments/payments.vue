@@ -83,22 +83,24 @@ function handleAddCard() {
       title="Add Payment Method"
       width="500px"
     >
-      <el-form label-position="top">
-        <el-form-item label="Card Number">
-          <el-input placeholder="**** **** **** ****" />
-        </el-form-item>
-        <div class="grid grid-cols-2 gap-4">
-          <el-form-item label="Expiry Date">
-            <el-input placeholder="MM/YY" />
+      <div class="p-6">
+        <el-form label-position="top">
+          <el-form-item label="Card Number">
+            <el-input placeholder="**** **** **** ****" />
           </el-form-item>
-          <el-form-item label="CVV">
-            <el-input placeholder="***" />
+          <div class="grid grid-cols-2 gap-4">
+            <el-form-item label="Expiry Date">
+              <el-input placeholder="MM/YY" />
+            </el-form-item>
+            <el-form-item label="CVV">
+              <el-input placeholder="***" />
+            </el-form-item>
+          </div>
+          <el-form-item label="Name on Card">
+            <el-input />
           </el-form-item>
-        </div>
-        <el-form-item label="Name on Card">
-          <el-input />
-        </el-form-item>
-      </el-form>
+        </el-form>
+      </div>
       <template #footer>
         <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleAddCard">Add Card</el-button>

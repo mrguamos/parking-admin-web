@@ -103,20 +103,22 @@ function handleAddUser() {
       title="Add New User"
       width="500px"
     >
-      <el-form label-position="top">
-        <el-form-item label="Name">
-          <el-input placeholder="Enter user's name" />
-        </el-form-item>
-        <el-form-item label="Email">
-          <el-input placeholder="Enter user's email" />
-        </el-form-item>
-        <el-form-item label="Role">
-          <el-select class="w-full" placeholder="Select role">
-            <el-option label="Admin" value="admin" />
-            <el-option label="User" value="user" />
-          </el-select>
-        </el-form-item>
-      </el-form>
+      <div class="p-6">
+        <el-form label-position="top">
+          <el-form-item label="Name">
+            <el-input placeholder="Enter user's name" />
+          </el-form-item>
+          <el-form-item label="Email">
+            <el-input placeholder="Enter user's email" />
+          </el-form-item>
+          <el-form-item label="Role">
+            <el-select class="w-full" placeholder="Select role">
+              <el-option label="Admin" value="admin" />
+              <el-option label="User" value="user" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </div>
       <template #footer>
         <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleAddUser">Add User</el-button>

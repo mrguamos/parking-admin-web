@@ -1,72 +1,74 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+interface ISettingItem {
+  icon: string;
+  label: string;
+  path: string;
+}
 
-const form = ref({
-  siteName: '',
-  adminEmail: '',
-  maxReservationDays: 7,
-  allowMultipleReservations: false,
-  notificationEnabled: true
-});
+const settingItems: ISettingItem[] = [
+  {
+    icon: 'person',
+    label: 'Account Info',
+    path: '/settings/account'
+  },
+  {
+    icon: 'lock',
+    label: 'Change Password',
+    path: '/settings/password'
+  },
+  {
+    icon: 'account_balance',
+    label: 'Payouts',
+    path: '/settings/payouts'
+  },
+  {
+    icon: 'payments',
+    label: 'Payments',
+    path: '/settings/payments'
+  },
+  {
+    icon: 'group_add',
+    label: 'Add Users',
+    path: '/settings/users'
+  }
+];
 
-const handleSubmit = () => {
-  // Save settings logic
+const handleLogout = () => {
+  // Logout logic here
 };
 </script>
 
 <template>
-  <div class="settings-container">
-    <el-card class="w-full">
-      <template #header>
-        <div class="flex items-center">
-          <span class="material-icons-outlined mr-2">settings</span>
-          <span>System Settings</span>
+  <div class="p-4 h-full flex flex-col items-center">
+    <div class="w-full max-w-md">
+      <div class="flex items-center mb-6">
+        <span class="material-icons-outlined mr-2">settings</span>
+        <span>Settings</span>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <div 
+          v-for="item in settingItems" 
+          :key="item.path"
+          class="p-4 rounded-lg bg-primary cursor-pointer flex items-center justify-between"
+          @click="$router.push(item.path)"
+        >
+          <div class="flex items-center">
+            <span class="material-icons-outlined mr-3">{{ item.icon }}</span>
+            <span>{{ item.label }}</span>
+          </div>
+          <span class="material-icons-outlined">chevron_right</span>
         </div>
-      </template>
 
-      <el-form
-        :model="form"
-        label-position="top"
-        class="max-w-2xl"
-      >
-        <el-form-item label="Site Name">
-          <el-input v-model="form.siteName" />
-        </el-form-item>
-
-        <el-form-item label="Admin Email">
-          <el-input v-model="form.adminEmail" type="email" />
-        </el-form-item>
-
-        <el-form-item label="Maximum Reservation Days">
-          <el-input-number 
-            v-model="form.maxReservationDays"
-            :min="1"
-            :max="30"
-          />
-        </el-form-item>
-
-        <el-form-item>
-          <el-switch
-            v-model="form.allowMultipleReservations"
-            active-text="Allow Multiple Reservations"
-          />
-        </el-form-item>
-
-        <el-form-item>
-          <el-switch
-            v-model="form.notificationEnabled"
-            active-text="Enable Email Notifications"
-          />
-        </el-form-item>
-
-        <el-form-item>
-          <el-button type="primary" @click="handleSubmit">
-            <span class="material-icons-outlined mr-1">save</span>
-            Save Settings
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+        <el-button 
+          type="danger" 
+          class="mt-4"
+          @click="handleLogout"
+        >
+          Logout
+        </el-button>
+      </div>
+    </div>
   </div>
 </template>
 

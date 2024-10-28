@@ -67,7 +67,7 @@ export const createVitePlugins = (viteEnv: Env): (PluginOption | PluginOption[])
 			inject: {
 				data: {
 					title: VITE_PROJECT_NAME,
-					favIcon: 'favicon',
+					favIcon: 'favicon.svg',
 					injectScript: `<script type="module" src="./inject.js"></script>`,
 				},
 				tags: [

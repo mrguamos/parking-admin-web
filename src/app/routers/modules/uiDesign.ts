@@ -38,9 +38,20 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 		},
 	},
 	{
+		path: '/users',
+		name: 'Users',
+		component: async () => await import('@views/users/users-list.vue'),
+		meta: {
+			title: 'Users',
+			titleKey: 'menus.Users',
+			hidden: false,
+			needCheckIsAdmin: true,
+			icon: '<span class="material-icons-outlined">group</span>',
+		},
+	},
+	{
 		path: '/settings',
 		name: 'Settings',
-		component: async () => await import('@views/settings/settings.vue'),
 		meta: {
 			title: 'Settings',
 			titleKey: 'menus.Settings',
@@ -48,5 +59,47 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 			needCheckIsAdmin: false,
 			icon: '<span class="material-icons-outlined">settings</span>',
 		},
+		children: [
+			{
+				path: '/settings/account',
+				name: 'AccountInfo',
+				component: async () => await import('@views/settings/account/account.vue'),
+				meta: {
+					title: 'Account Info',
+					titleKey: 'menus.Account_Info',
+					icon: '<span class="material-icons-outlined">person</span>',
+				},
+			},
+			{
+				path: '/settings/password',
+				name: 'ChangePassword',
+				component: async () => await import('@views/settings/password/password.vue'),
+				meta: {
+					title: 'Change Password',
+					titleKey: 'menus.Change_Password',
+					icon: '<span class="material-icons-outlined">lock</span>',
+				},
+			},
+			{
+				path: '/settings/payouts',
+				name: 'Payouts',
+				component: async () => await import('@views/settings/payouts/payouts.vue'),
+				meta: {
+					title: 'Payouts',
+					titleKey: 'menus.Payouts',
+					icon: '<span class="material-icons-outlined">account_balance</span>',
+				},
+			},
+			{
+				path: '/settings/payments',
+				name: 'Payments',
+				component: async () => await import('@views/settings/payments/payments.vue'),
+				meta: {
+					title: 'Payments',
+					titleKey: 'menus.Payments',
+					icon: '<span class="material-icons-outlined">payments</span>',
+				},
+			},
+		],
 	},
 ];

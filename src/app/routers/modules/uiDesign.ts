@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 export const uiDesignRouters: RouteRecordRaw[] = [
 	{
-		path: '/home',
+		path: '/',
 		name: 'Home',
 		component: async () => await import('@views/home/home.vue'),
 		meta: {

@@ -43,9 +43,9 @@
 			<el-menu
 				:default-active="defaultActive"
 				:collapse="isCollapse"
-				unique-opened="true"
-				collapse-transition="false"
-				router="true"
+				:unique-opened="true"
+				:collapse-transition="false"
+				:router="true"
 				mode="vertical"
 			>
 				<menu-item v-for="(route, index) in navigation" :key="index" :route="route" />

@@ -41,10 +41,10 @@
 
       <el-form-item label="Available Rates">
         <el-checkbox-group v-model="selectedRates">
-          <el-checkbox label="hourly">Hourly</el-checkbox>
-          <el-checkbox label="daily">Daily</el-checkbox>
-          <el-checkbox label="weekly">Weekly</el-checkbox>
-          <el-checkbox label="monthly">Monthly</el-checkbox>
+          <el-checkbox value="hourly">Hourly</el-checkbox>
+          <el-checkbox value="daily">Daily</el-checkbox>
+          <el-checkbox value="weekly">Weekly</el-checkbox>
+          <el-checkbox value="monthly">Monthly</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
 

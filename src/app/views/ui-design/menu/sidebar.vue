@@ -6,7 +6,7 @@
 	<el-menu
 		default-active="2"
 		class="[&:not(.el-menu--collapse)]:w-64"
-		unique-opened="true"
+		:unique-opened="true"
 		:collapse="isCollapse"
 		@open="handleOpen"
 		@close="handleClose"

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { IParkingBasicInformation } from '@/models/parking/parking-basic-info.interface'
 
 interface IParkingLot {
   id: number
@@ -36,6 +37,7 @@ interface IParkingLotForm {
 
 export const useParkingLotStore = defineStore('parkingLot', () => {
   const parkingLots = ref<IParkingLot[]>([])
+  const currentParkingLot = ref<IParkingBasicInformation | null>(null)
   const isLoading = ref(false)
 
   async function fetchParkingLots() {
@@ -128,6 +130,7 @@ export const useParkingLotStore = defineStore('parkingLot', () => {
 
   return {
     parkingLots,
+    currentParkingLot,
     isLoading,
     fetchParkingLots,
     getParkingLot,

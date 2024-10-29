@@ -33,4 +33,22 @@
 @import '@styles/global.scss';
 @import '@styles/mixins';
 
+/* Override Element Plus loading styles */
+.el-loading-mask {
+  background-color: transparent !important;
+  backdrop-filter: none;
+
+  .el-loading-spinner {
+    .circular {
+      width: 32px;
+      height: 32px;
+    }
+
+    .path {
+      stroke: var(--el-color-primary);
+      stroke-width: 2;
+    }
+  }
+}
+
 

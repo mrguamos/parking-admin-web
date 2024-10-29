@@ -44,7 +44,19 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 			hidden: false,
 			needCheckIsAdmin: false,
 			icon: '<span class="material-icons-outlined">calendar_month</span>',
-		},
+		}
+	},
+	{
+		path: '/car-logs',
+		name: 'CarLogs',
+		component: async () => await import('@views/car-logs/car-logs-list.vue'),
+		meta: {
+			title: 'Car Logs',
+			titleKey: 'menus.Car_Logs',
+			hidden: false,
+			needCheckIsAdmin: false,
+			icon: '<span class="material-icons-outlined">directions_car</span>',
+		}
 	},
 	{
 		path: '/users',
@@ -111,4 +123,37 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 			},
 		],
 	},
+	{
+		path: '/license-plates',
+		name: 'LicensePlates',
+		component: async () => await import('@views/license-plates/license-plates-list.vue'),
+		meta: {
+			title: 'License Plates',
+			titleKey: 'menus.License_Plates',
+			hidden: false,
+			needCheckIsAdmin: false,
+			icon: '<span class="material-icons-outlined">credit_card</span>',
+		},
+	},
+	{
+		path: '/drivers',
+		name: 'Drivers',
+		component: async () => await import('@views/drivers/drivers-list.vue'),
+		meta: {
+			title: "Driver Profiles",
+			titleKey: 'menus.Drivers_Profile',
+			hidden: false,
+			needCheckIsAdmin: true,
+			icon: '<span class="material-icons-outlined">manage_accounts</span>',
+		}
+	},
+	{
+		path: '/drivers/:id?/form',
+		name: 'DriversForm',
+		component: async () => await import('@views/drivers/drivers-form.vue'),
+		meta: {
+			title: "Driver Form",
+			hidden: true
+		}
+	}
 ];

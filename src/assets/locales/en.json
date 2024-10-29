@@ -78,7 +78,15 @@
 		"Account_Info": "Account Info",
 		"Change_Password": "Change Password",
 		"Payouts": "Payouts",
-		"Payments": "Payments"
+		"Payments": "Payments",
+		"Car_Logs": "Car Logs",
+		"Orders": "Orders",
+		"Fine_Orders": "Fine Orders",
+		"License_Plates": "License Plates",
+		"Active_Reservations": "Active Reservations",
+		"Reservation_History": "Reservation History",
+		"Drivers": "Drivers",
+		"Drivers_Profile": "Driver Profiles"
 	},
 	"login": {
 		"User_Name": "User Name",

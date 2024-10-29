@@ -74,7 +74,7 @@ const handleDelete = async (row: { id: number }) => {
                 <el-tag 
                   v-for="(enabled, rate) in lot.rates" 
                   :key="rate"
-                  :type="enabled ? 'info' : ''"
+                  :type="enabled ? 'info' : undefined"
                   class="capitalize"
                 >
                   {{ rate }}

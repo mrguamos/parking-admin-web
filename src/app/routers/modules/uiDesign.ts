@@ -26,6 +26,15 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 		},
 	},
 	{
+		path: '/parking-lots/:id?/form',
+		name: 'ParkingLotsForm',
+		component: async () => await import('@views/parking-lots/parking-lots-form.vue'),
+		meta: {
+			title: 'Parking Lot Form',
+			hidden: true
+		}
+	},
+	{
 		path: '/reservations',
 		name: 'Reservations',
 		component: async () => await import('@views/reservations/reservations-list.vue'),

@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  status: 'active' | 'inactive';
-  lastLogin: string;
-}
+import { IUser } from '@/models/users/user.interface';
 
 const users = ref<IUser[]>([
   {

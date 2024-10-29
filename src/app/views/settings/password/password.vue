@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-interface IPasswordForm {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
+import { IPasswordForm } from '@/models/settings/account.interface';
 
 const passwordForm = ref<IPasswordForm>({
   currentPassword: '',

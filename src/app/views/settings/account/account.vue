@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-interface IUserProfile {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-}
+import { IUserProfile } from '@/models/settings/account.interface';
 
 const userProfile = ref<IUserProfile>({
   name: 'John Doe',

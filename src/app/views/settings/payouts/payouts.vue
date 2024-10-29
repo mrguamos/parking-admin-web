@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-interface IPayoutMethod {
-  id: string;
-  type: string;
-  details: string;
-  isDefault: boolean;
-}
+import { IPayoutMethod } from '@/models/settings/payout.interface';
 
 const payoutMethods = ref<IPayoutMethod[]>([
   {

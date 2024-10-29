@@ -1,9 +1,5 @@
 <script setup lang="ts">
-interface ISettingItem {
-  icon: string;
-  label: string;
-  path: string;
-}
+import { ISettingItem } from '@/models/settings/setting.interface';
 
 const settingItems: ISettingItem[] = [
   {

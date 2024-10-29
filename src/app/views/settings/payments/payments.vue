@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-interface IPaymentMethod {
-  id: string;
-  type: string;
-  lastFour: string;
-  expiryDate: string;
-  isDefault: boolean;
-}
+import { IPaymentMethod } from '@/models/settings/payment.interface';
 
 const paymentMethods = ref<IPaymentMethod[]>([
   {

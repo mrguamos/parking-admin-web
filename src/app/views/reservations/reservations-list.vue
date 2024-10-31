@@ -17,6 +17,16 @@ const searchText = ref('');
 const currentPage = ref(1);
 const pageSize = ref(10);
 
+const filterDialogVisible = ref(false);
+const filterForm = ref({
+  startDate: '',
+  endDate: '',
+  licensePlate: '',
+  parkingLot: '',
+  minPrice: '',
+  maxPrice: ''
+});
+
 // Mock data
 const mockReservations: IReservation[] = Array(20).fill(null).map((_, index) => ({
   id: index + 1,
@@ -57,22 +67,53 @@ function handlePageChange(page: number) {
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleString();
 }
+
+// Add parking lot options for filter
+const parkingLotOptions = computed(() => {
+  const uniqueLots = new Set(mockReservations.map(r => r.parkingLot));
+  return Array.from(uniqueLots).map(lot => ({
+    label: lot,
+    value: lot
+  }));
+});
+
+function handleFilter() {
+  filterDialogVisible.value = false;
+  // Implement filter logic here
+}
+
+function resetFilter() {
+  filterForm.value = {
+    startDate: '',
+    endDate: '',
+    licensePlate: '',
+    parkingLot: '',
+    minPrice: '',
+    maxPrice: ''
+  };
+}
 </script>
 
 <template>
   <div class="p-6">
     <div class="mb-6">
       <h2 class="text-xl font-semibold mb-4">Reservations</h2>
-      <el-input
-        v-model="searchText"
-        placeholder="Search reservations..."
-        class="w-full"
-        clearable
-      >
-        <template #prefix>
-          <span class="material-icons-outlined">search</span>
-        </template>
-      </el-input>
+      <div class="flex gap-4">
+        <el-input
+          v-model="searchText"
+          placeholder="Search reservations..."
+          class="w-full"
+          clearable
+        >
+          <template #prefix>
+            <span class="material-icons-outlined">search</span>
+          </template>
+        </el-input>
+        <el-button @click="filterDialogVisible = true">
+          <span class="material-icons-outlined">filter_list</span>
+          Filter
+        </el-button>
+      </div>
     </div>
 
     <el-card v-loading="loading">
@@ -116,15 +157,83 @@ function formatDate(dateString: string) {
         />
       </div>
     </el-card>
+
+    <!-- Filter Dialog -->
+    <el-dialog
+      v-model="filterDialogVisible"
+      title="Filter Reservations"
+      width="500px"
+    >
+      <div class="p-6 space-y-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <div class="mb-2">Start Date</div>
+            <el-date-picker
+              v-model="filterForm.startDate"
+              type="date"
+              placeholder="mm/dd/yyyy"
+              class="w-full"
+            />
+          </div>
+          <div>
+            <div class="mb-2">End Date</div>
+            <el-date-picker
+              v-model="filterForm.endDate"
+              type="date"
+              placeholder="mm/dd/yyyy"
+              class="w-full"
+            />
+          </div>
+        </div>
+
+        <div>
+          <div class="mb-2">License Plate</div>
+          <el-input 
+            v-model="filterForm.licensePlate" 
+            placeholder="Enter license plate"
+          />
+        </div>
+
+        <div>
+          <div class="mb-2">Parking Lot</div>
+          <el-select 
+            v-model="filterForm.parkingLot" 
+            class="w-full" 
+            placeholder="Select parking lot"
+          >
+            <el-option
+              v-for="option in parkingLotOptions"
+              :key="option.value"
+              :label="option.label"
+              :value="option.value"
+            />
+          </el-select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <div class="mb-2">Min Price</div>
+            <el-input 
+              v-model="filterForm.minPrice" 
+              type="number" 
+              placeholder="Enter min price"
+            />
+          </div>
+          <div>
+            <div class="mb-2">Max Price</div>
+            <el-input 
+              v-model="filterForm.maxPrice" 
+              type="number" 
+              placeholder="Enter max price"
+            />
+          </div>
+        </div>
+
+        <div class="flex gap-4 pt-4">
+          <el-button class="flex-1" @click="resetFilter">Reset</el-button>
+          <el-button type="primary" class="flex-1" @click="handleFilter">Apply Filters</el-button>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
-
-<style lang="scss" scoped>
-:deep(.el-tabs__header) {
-  margin-bottom: 24px;
-}
-
-:deep(.el-tabs__nav-wrap) {
-  padding: 0 24px;
-}
-</style>

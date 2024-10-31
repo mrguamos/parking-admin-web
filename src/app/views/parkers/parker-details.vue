@@ -156,14 +156,29 @@ async function handleDeleteLicensePlate(plate: any) {
 const rfidDialogVisible = ref(false);
 const editingRfid = ref<any>(null);
 
+// Add mock data for available RFIDs
+const availableRfids = [
+  { id: 1, number: 'RFID001' },
+  { id: 2, number: 'RFID002' },
+  { id: 3, number: 'RFID003' },
+  { id: 4, number: 'RFID004' },
+  { id: 5, number: 'RFID005' },
+  { id: 6, number: 'RFID006' },
+  { id: 7, number: 'RFID007' },
+  { id: 8, number: 'RFID008' },
+  { id: 9, number: 'RFID009' },
+  { id: 10, number: 'RFID010' },
+];
+
+// Update the rfidForm to use id instead of number
 const rfidForm = ref({
-  number: ''
+  id: ''
 });
 
 function showAddRfid() {
   editingRfid.value = null;
   rfidForm.value = {
-    number: ''
+    id: ''
   };
   rfidDialogVisible.value = true;
 }
@@ -183,30 +198,32 @@ async function handleRfidSubmit() {
       r => r.id === editingRfid.value.id
     );
     if (index !== -1) {
-      const updatedRfids = [...driverStore.selectedDriver.rfids];
-      updatedRfids[index] = {
-        ...editingRfid.value,
-        ...rfidForm.value
-      };
-      driverStore.selectedDriver.rfids = updatedRfids;
+      const selectedRfid = availableRfids.find(r => r.id === Number(rfidForm.value.id));
+      if (selectedRfid) {
+        const updatedRfids = [...driverStore.selectedDriver.rfids];
+        updatedRfids[index] = {
+          id: selectedRfid.id,
+          number: selectedRfid.number
+        };
+        driverStore.selectedDriver.rfids = updatedRfids;
+      }
     }
   } else {
     // Create logic
-    const newRfid = {
-      id: Date.now(),
-      ...rfidForm.value
-    };
-    driverStore.selectedDriver.rfids = [
-      ...driverStore.selectedDriver.rfids,
-      newRfid
-    ];
+    const selectedRfid = availableRfids.find(r => r.id === Number(rfidForm.value.id));
+    if (selectedRfid) {
+      const newRfid = {
+        id: selectedRfid.id,
+        number: selectedRfid.number
+      };
+      driverStore.selectedDriver.rfids = [
+        ...driverStore.selectedDriver.rfids,
+        newRfid
+      ];
+    }
   }
   
   rfidDialogVisible.value = false;
-  // Reset form
-  rfidForm.value = {
-    number: ''
-  };
 }
 
 async function handleDeleteRfid(rfid: any) {
@@ -367,7 +384,7 @@ async function handleDeleteRfid(rfid: any) {
           <div class="mb-4 flex justify-end">
             <el-button type="primary" @click="showAddRfid">
               <span class="material-icons-outlined mr-2">add</span>
-              Add RFID
+              Assign RFID
             </el-button>
           </div>
 
@@ -508,20 +525,31 @@ async function handleDeleteRfid(rfid: any) {
     <!-- RFID Dialog -->
     <el-dialog
       v-model="rfidDialogVisible"
-      :title="editingRfid ? 'Edit RFID' : 'Add RFID'"
+      :title="editingRfid ? 'Edit RFID' : 'Assign RFID'"
       width="500px"
     >
       <div class="p-6">
         <el-form :model="rfidForm" label-position="top">
           <el-form-item label="RFID" required>
-            <el-input v-model="rfidForm.number" />
+            <el-select 
+              v-model="rfidForm.id"
+              class="w-full"
+              placeholder="Select RFID"
+            >
+              <el-option
+                v-for="rfid in availableRfids"
+                :key="rfid.id"
+                :label="rfid.number"
+                :value="rfid.id"
+              />
+            </el-select>
           </el-form-item>
         </el-form>
       </div>
       <template #footer>
         <el-button @click="rfidDialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleRfidSubmit">
-          {{ editingRfid ? 'Update' : 'Create' }}
+          {{ editingRfid ? 'Update' : 'Assign' }}
         </el-button>
       </template>
     </el-dialog>

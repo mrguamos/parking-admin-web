@@ -51,4 +51,6 @@
   }
 }
 
-
+.el-message-box__btns {
+  @apply gap-2;
+}

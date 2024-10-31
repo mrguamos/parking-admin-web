@@ -16,6 +16,12 @@ interface IDriverDetail {
     total: number;
     overdueFine?: number;
   }[];
+  licensePlates: {
+    id: number;
+    number: string;
+    state: string;
+    stateCode: string;
+  }[];
 }
 
 export const useDriverStore = defineStore('driver', () => {

@@ -75,8 +75,39 @@ function handleRowClick(row: any) {
         date: '5/14/2024 10:10 AM',
         total: 20,
         overdueFine: 55.56
+      }
+    ],
+    licensePlates: [
+      {
+        id: 1,
+        number: 'JKK12523423',
+        state: 'California',
+        stateCode: 'CA'
       },
-      // Add more reservations as needed
+      {
+        id: 2,
+        number: 'ABC12345',
+        state: 'New York',
+        stateCode: 'NY'
+      },
+      {
+        id: 3,
+        number: 'XYZ98765',
+        state: 'Texas',
+        stateCode: 'TX'
+      },
+      {
+        id: 4,
+        number: 'DEF45678',
+        state: 'Florida',
+        stateCode: 'FL'
+      },
+      {
+        id: 5,
+        number: 'GHI78901',
+        state: 'Washington',
+        stateCode: 'WA'
+      }
     ]
   };
   

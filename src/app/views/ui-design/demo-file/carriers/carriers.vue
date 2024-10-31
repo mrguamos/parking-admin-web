@@ -44,7 +44,7 @@
 		<!-- 表格 -->
 		<div class="table-container show-pagination">
 			<el-table v-loading="loading" :data="tableData" border class="mt-3" max-height="440px">
-				<el-table-column prop="Id" label="ID" width="120" />
+				<el-table-column prop="Id" label="ID"  />
 				<el-table-column prop="companyName" label="Company Name" />
 				<el-table-column prop="Carrier" label="Carrier" width="180" />
 				<el-table-column prop="AccountNumber" label="Account Number" />

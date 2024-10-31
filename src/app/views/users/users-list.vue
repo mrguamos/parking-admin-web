@@ -111,8 +111,8 @@ async function handleDelete(user: IUser) {
         </template>
       </el-table-column>
       <el-table-column prop="email" label="Email" />
-      <el-table-column prop="role" label="Role" width="120" />
-      <el-table-column prop="status" label="Status" width="120">
+      <el-table-column prop="role" label="Role"  />
+      <el-table-column prop="status" label="Status" >
         <template #default="{ row }">
           <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
             {{ row.status }}

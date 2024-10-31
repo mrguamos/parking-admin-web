@@ -11,7 +11,7 @@ interface IReservation {
 
 const statistics = ref({
   openSpots: 123,
-  bookedSpots: '$123.00',
+  bookedSpots: '123',
   todaysReservations: 123,
   todaysRevenue: '$321.00'
 });

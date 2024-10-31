@@ -24,15 +24,6 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 		},
 	},
 	{
-		path: '/parking-lots/:id?/form',
-		name: 'ParkingLotsForm',
-		component: async () => await import('@views/parking-lots/parking-lots-form.vue'),
-		meta: {
-			title: 'Parking Lot Form',
-			hidden: true
-		}
-	},
-	{
 		path: '/reservations',
 		name: 'Reservations',
 		component: async () => await import('@views/reservations/reservations-list.vue'),
@@ -64,6 +55,17 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 			hidden: false,
 			needCheckIsAdmin: true,
 			icon: '<span class="material-icons-outlined">person</span>',
+		},
+	},
+	{
+		path: '/rfid-tags',
+		name: 'RFIDTags',
+		component: async () => await import('@views/rfid-tags/rfid-tags-list.vue'),
+		meta: {
+			title: 'RFID Tags',
+			titleKey: 'menus.RFID_Tags',
+			hidden: false,
+			icon: '<span class="material-icons-outlined">nfc</span>',
 		},
 	},
 	{

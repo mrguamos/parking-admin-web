@@ -76,11 +76,11 @@
     </el-form>
 
     <el-table :data="entries" style="width: 100%">
-      <el-table-column prop="et" label="ET #" width="120"></el-table-column>
+      <el-table-column prop="et" label="ET #" ></el-table-column>
       <el-table-column prop="etType" label="ET Type" width="150"></el-table-column>
       <el-table-column prop="driverName" label="Driver Name" width="180"></el-table-column>
-      <el-table-column prop="carrier" label="Carrier" width="120"></el-table-column>
-      <el-table-column prop="mcDot" label="MC / DOT" width="120"></el-table-column>
+      <el-table-column prop="carrier" label="Carrier" ></el-table-column>
+      <el-table-column prop="mcDot" label="MC / DOT" ></el-table-column>
       <el-table-column prop="currentStatus" label="Current Status" width="180"></el-table-column>
       <el-table-column label="Actions" width="200">
         <template #default="scope">

@@ -75,7 +75,7 @@
 				style="width: 100%"
 				max-height="64vh"
 			>
-				<el-table-column prop="Id" label="ID" width="120" />
+				<el-table-column prop="Id" label="ID"  />
 				<el-table-column prop="companyName" label="Company Name" />
 				<el-table-column prop="Carrier" label="Carrier" width="180" />
 				<el-table-column prop="AccountNumber" label="Account Number" />

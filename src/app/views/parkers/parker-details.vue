@@ -340,9 +340,9 @@ async function handleDeleteRfid(rfid: any) {
               <el-table-column prop="number" label="License Plate" />
               <el-table-column prop="state" label="State" />
               <el-table-column prop="stateCode" label="State Code" />
-              <el-table-column label="Actions" width="120" align="center">
+              <el-table-column label="">
                 <template #default="{ row }">
-                  <div class="flex items-center justify-center gap-2">
+                  <div class="flex items-center justify-end gap-1">
                     <el-button 
                       type="primary" 
                       text
@@ -374,9 +374,9 @@ async function handleDeleteRfid(rfid: any) {
           <el-card>
             <el-table :data="driverStore.selectedDriver?.rfids">
               <el-table-column prop="number" label="RFID" />
-              <el-table-column label="Actions" width="120" align="center">
+              <el-table-column label="">
                 <template #default="{ row }">
-                  <div class="flex items-center justify-center gap-2">
+                  <div class="flex items-center justify-end gap-1">
                     <el-button 
                       type="primary" 
                       text

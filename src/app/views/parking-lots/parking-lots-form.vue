@@ -52,11 +52,16 @@
           </el-form-item>
 
           <el-form-item label="Dock Start">
-            <el-input v-model="formData.dockStart" />
+            <el-input v-model="formData.dockStart" type="number" />
           </el-form-item>
 
           <el-form-item label="Dock End">
-            <el-input v-model="formData.dockEnd" />
+            <el-input v-model="formData.dockEnd" type="number" />
+          </el-form-item>
+
+          <!-- Display total spaces -->
+          <el-form-item label="Total Spaces" class="md:col-span-2">
+            <div class="text-gray-700">{{ totalSpaces }} spaces</div>
           </el-form-item>
 
           <el-form-item label="Operating Rate ($)">
@@ -248,17 +253,19 @@
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useParkingLotStore } from '@/stores/parking-lot';
 import type { FormInstance, FormRules, UploadFile, UploadFiles } from 'element-plus';
+import type { IParkingLotForm } from '@/models/parking/parking-lot.interface';
 
 const route = useRoute();
 const router = useRouter();
+const parkingLotStore = useParkingLotStore();
 const formRef = ref<FormInstance>();
 const loading = ref(false);
 
-const formData = ref({
-  // Location
+const formData = ref<IParkingLotForm>({
   parkingType: '',
   name: '',
   address: '',
@@ -270,11 +277,7 @@ const formData = ref({
   operatingRate: '',
   gracePeriod: '2',
   gracePeriodUnit: 'Minutes',
-
-  // Reserved Docks
   reservedDocks: [''],
-
-  // Preferences
   rates: {
     hourly: true,
     daily: false,
@@ -285,15 +288,27 @@ const formData = ref({
     weeklyRate: '',
     monthlyRate: ''
   },
-
-  // Information
-  images: [] as UploadFile[],
-
-  // Description
+  images: [],
   propertyOverview: '',
   buildingHighlights: '',
   amenities: '',
-  termsOfService: ''
+  termsOfService: '',
+  status: 1,
+  availableSpaces: 0
+});
+
+// Calculate total spaces based on dock start and end
+const totalSpaces = computed(() => {
+  const start = parseInt(formData.value.dockStart) || 0;
+  const end = parseInt(formData.value.dockEnd) || 0;
+  return start && end ? end - start + 1 : 0;
+});
+
+// Watch for changes in dock start/end and update reserved docks validation
+watch([() => formData.value.dockStart, () => formData.value.dockEnd], () => {
+  if (formRef.value) {
+    formRef.value.validateField('reservedDocks');
+  }
 });
 
 const uploadCount = computed(() => formData.value.images.length);
@@ -310,7 +325,52 @@ const rules: FormRules = {
   name: [{ required: true, message: 'Name is required', trigger: 'blur' }],
   address: [{ required: true, message: 'Address is required', trigger: 'blur' }],
   city: [{ required: true, message: 'City is required', trigger: 'blur' }],
-  zipCode: [{ required: true, message: 'ZIP code is required', trigger: 'blur' }]
+  zipCode: [{ required: true, message: 'ZIP code is required', trigger: 'blur' }],
+  dockStart: [
+    { required: true, message: 'Dock start is required', trigger: 'blur' },
+    { 
+      validator: (rule, value, callback) => {
+        const start = parseInt(value);
+        const end = parseInt(formData.value.dockEnd);
+        if (start && end && start > end) {
+          callback(new Error('Dock start should be less than dock end'));
+        } else {
+          callback();
+        }
+      }, 
+      trigger: 'blur' 
+    }
+  ],
+  dockEnd: [
+    { required: true, message: 'Dock end is required', trigger: 'blur' },
+    { 
+      validator: (rule, value, callback) => {
+        const start = parseInt(formData.value.dockStart);
+        const end = parseInt(value);
+        if (start && end && end < start) {
+          callback(new Error('Dock end should be greater than dock start'));
+        } else {
+          callback();
+        }
+      }, 
+      trigger: 'blur' 
+    }
+  ],
+  'reservedDocks': [
+    { 
+      validator: (rule, value, callback) => {
+        const start = parseInt(formData.value.dockStart);
+        const end = parseInt(formData.value.dockEnd);
+        const dock = parseInt(value);
+        if (dock && (dock < start || dock > end)) {
+          callback(new Error(`Dock number must be between ${start} and ${end}`));
+        } else {
+          callback();
+        }
+      }, 
+      trigger: 'blur' 
+    }
+  ]
 };
 
 function addDock() {
@@ -328,5 +388,17 @@ async function handleSubmit() {
       // Handle form submission
     }
   });
+}
+
+async function loadParkingLot(id: number) {
+  loading.value = true;
+  try {
+    const storedLot = parkingLotStore.currentParkingLot;
+    if (storedLot && storedLot.parkId === id) {
+      formData.value = { ...storedLot };
+    }
+  } finally {
+    loading.value = false;
+  }
 }
 </script> 

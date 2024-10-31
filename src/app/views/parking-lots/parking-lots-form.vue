@@ -2,7 +2,7 @@
   <div class="p-6">
     <div class="mb-6 flex items-center justify-between">
       <h2 class="text-xl font-semibold">
-        {{ route.params.id ? 'Edit' : 'Create' }} Parking Lot
+        {{ route.params.id ? formData.name : 'Create Parking Lot' }}
       </h2>
       <el-button @click="router.push('/parking-lots')">
         <span class="material-icons-outlined">arrow_back</span>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { IUser } from '@/models/users/user.interface';
+import { IUser, IUserForm, UserRole } from '@/models/users/user.interface';
 import { ElMessageBox } from 'element-plus';
 
 const users = ref<IUser[]>([
@@ -24,10 +24,10 @@ const users = ref<IUser[]>([
 
 const dialogVisible = ref(false);
 const editingUser = ref<IUser | null>(null);
-const formData = ref({
+const formData = ref<IUserForm>({
   name: '',
   email: '',
-  role: ''
+  role: 'User'
 });
 
 function showAddDialog() {
@@ -35,7 +35,7 @@ function showAddDialog() {
   formData.value = {
     name: '',
     email: '',
-    role: ''
+    role: 'User'
   };
   dialogVisible.value = true;
 }

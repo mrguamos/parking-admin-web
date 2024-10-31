@@ -3,12 +3,12 @@
 <template>
 	<div class="unis-sidebar" :class="[isCollapse ? 'unis-sidebar__collapse' : null]">
 		<div class="unis-sidebar-head" :class="[isCollapse ? 'unis-sidebar-head__collapse' : null]">
-			<div class="logo-top flex items-center gap-1 text-tiny-uppercase">
+			<div class="logo-top flex items-center text-tiny-uppercase">
 				<logo class="text-brand-foreground"></logo>
-				<div v-if="!isCollapse" class="logo-info">
+			</div>
+			<div v-if="!isCollapse" class="logo-info">
 					Cubework Parking
 				</div>
-			</div>
 			<div>
 				<template v-if="!isCollapse">
 					<el-button

@@ -48,8 +48,8 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 		name: 'Drivers',
 		component: async () => await import('@views/drivers/drivers-list.vue'),
 		meta: {
-			title: 'Driver Profiles',
-			titleKey: 'menus.Drivers_Profile',
+			title: 'Parker Accounts',
+			titleKey: 'menus.Parker_Accounts',
 			hidden: false,
 			icon: '<span class="material-icons-outlined">group</span>',
 		},

@@ -214,6 +214,7 @@
 
       <!-- Form Actions -->
       <div class="flex justify-end gap-4">
+        <el-button @click="router.push('/parking-lots')">Cancel</el-button>
         <el-button type="primary" @click="handleSubmit" :loading="loading">
           {{ route.params.id ? 'Update' : 'Create' }} Parking Lot
         </el-button>

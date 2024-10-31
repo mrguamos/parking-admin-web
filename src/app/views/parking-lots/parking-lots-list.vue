@@ -13,6 +13,7 @@ const currentPage = ref(1);
 const pageSize = ref(10);
 
 const mockParkingLots: IParkingLotForm[] = Array(20).fill(null).map((_, index) => ({
+  parkId: index + 1,
   parkingType: 'Commercial',
   name: `Parking Lot ${index + 1}`,
   address: `${1000 + index} Main Street`,

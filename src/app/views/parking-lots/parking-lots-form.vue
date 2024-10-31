@@ -253,7 +253,7 @@
 </style>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useParkingLotStore } from '@/stores/parking-lot';
 import type { FormInstance, FormRules, UploadFile, UploadFiles } from 'element-plus';
@@ -401,4 +401,11 @@ async function loadParkingLot(id: number) {
     loading.value = false;
   }
 }
+
+onMounted(() => {
+  const parkId = route.params.id;
+  if (parkId) {
+    loadParkingLot(Number(parkId));
+  }
+});
 </script> 

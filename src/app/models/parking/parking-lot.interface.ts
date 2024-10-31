@@ -1,6 +1,7 @@
 import type { UploadFile } from 'element-plus';
 
 export interface IParkingLotForm {
+  parkId?: number;
   parkingType: string;
   name: string;
   address: string;
@@ -23,7 +24,7 @@ export interface IParkingLotForm {
     weeklyRate: string;
     monthlyRate: string;
   };
-  images: UploadFile[];
+  images: any[];
   propertyOverview: string;
   buildingHighlights: string;
   amenities: string;

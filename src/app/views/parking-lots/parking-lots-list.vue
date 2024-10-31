@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useParkingLotStore } from '@stores/parking-lot';
 import { ElMessageBox } from 'element-plus';
@@ -10,6 +10,7 @@ const parkingLotStore = useParkingLotStore();
 const loading = ref(false);
 const currentPage = ref(1);
 const pageSize = ref(10);
+const searchText = ref('');
 
 // Mock data
 const mockParkingLots = [
@@ -275,6 +276,19 @@ const mockParkingLots = [
   }
 ];
 
+// Add search functionality
+const filteredParkingLots = computed(() => {
+  if (!searchText.value) return mockParkingLots;
+  
+  const search = searchText.value.toLowerCase();
+  return mockParkingLots.filter(lot => 
+    lot.parkName.toLowerCase().includes(search) ||
+    lot.parkNumber.toLowerCase().includes(search) ||
+    lot.address.toLowerCase().includes(search) ||
+    lot.city.toLowerCase().includes(search)
+  );
+});
+
 async function fetchParkingLots() {
   loading.value = true;
   try {
@@ -345,9 +359,23 @@ onMounted(() => {
       </el-button>
     </div>
 
+    <!-- Updated search bar to use full width -->
+    <div class="mb-6">
+      <el-input
+        v-model="searchText"
+        placeholder="Search parking lots..."
+        class="w-full"
+        clearable
+      >
+        <template #prefix>
+          <span class="material-icons-outlined text-gray-400">search</span>
+        </template>
+      </el-input>
+    </div>
+
     <div v-loading="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <el-card 
-        v-for="lot in mockParkingLots" 
+        v-for="lot in filteredParkingLots" 
         :key="lot.parkId" 
         class="overflow-hidden"
       >

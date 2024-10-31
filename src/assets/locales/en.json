@@ -77,7 +77,8 @@
 		"Users": "Users",
 		"Account_Info": "Account Info",
 		"Change_Password": "Change Password",
-		"Payouts": "Payouts"
+		"Payouts": "Payouts",
+		"Drivers_Profile": "Driver Profiles"
 	},
 	"login": {
 		"User_Name": "User Name",

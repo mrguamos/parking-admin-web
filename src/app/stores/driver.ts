@@ -22,6 +22,10 @@ interface IDriverDetail {
     state: string;
     stateCode: string;
   }[];
+  rfids: {
+    id: number;
+    number: string;
+  }[];
 }
 
 export const useDriverStore = defineStore('driver', () => {

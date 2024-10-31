@@ -152,6 +152,83 @@ async function handleDeleteLicensePlate(plate: any) {
     // User cancelled deletion
   }
 }
+
+const rfidDialogVisible = ref(false);
+const editingRfid = ref<any>(null);
+
+const rfidForm = ref({
+  number: ''
+});
+
+function showAddRfid() {
+  editingRfid.value = null;
+  rfidForm.value = {
+    number: ''
+  };
+  rfidDialogVisible.value = true;
+}
+
+function showEditRfid(rfid: any) {
+  editingRfid.value = rfid;
+  rfidForm.value = { ...rfid };
+  rfidDialogVisible.value = true;
+}
+
+async function handleRfidSubmit() {
+  if (!driverStore.selectedDriver) return;
+
+  if (editingRfid.value) {
+    // Update logic
+    const index = driverStore.selectedDriver.rfids.findIndex(
+      r => r.id === editingRfid.value.id
+    );
+    if (index !== -1) {
+      const updatedRfids = [...driverStore.selectedDriver.rfids];
+      updatedRfids[index] = {
+        ...editingRfid.value,
+        ...rfidForm.value
+      };
+      driverStore.selectedDriver.rfids = updatedRfids;
+    }
+  } else {
+    // Create logic
+    const newRfid = {
+      id: Date.now(),
+      ...rfidForm.value
+    };
+    driverStore.selectedDriver.rfids = [
+      ...driverStore.selectedDriver.rfids,
+      newRfid
+    ];
+  }
+  
+  rfidDialogVisible.value = false;
+  // Reset form
+  rfidForm.value = {
+    number: ''
+  };
+}
+
+async function handleDeleteRfid(rfid: any) {
+  try {
+    await ElMessageBox.confirm(
+      'Are you sure you want to delete this RFID?',
+      'Warning',
+      {
+        type: 'warning',
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel'
+      }
+    );
+    if (driverStore.selectedDriver) {
+      driverStore.selectedDriver.rfids = driverStore.selectedDriver.rfids.filter(
+        r => r.id !== rfid.id
+      );
+    }
+  } catch {
+    // User cancelled deletion
+  }
+}
 </script>
 
 <template>
@@ -286,7 +363,40 @@ async function handleDeleteLicensePlate(plate: any) {
             </el-table>
           </el-card>
         </el-tab-pane>
-        <el-tab-pane label="RFIDs" name="RFIDs" />
+        <el-tab-pane label="RFIDs" name="RFIDs">
+          <div class="mb-4 flex justify-end">
+            <el-button type="primary" @click="showAddRfid">
+              <span class="material-icons-outlined mr-2">add</span>
+              Add RFID
+            </el-button>
+          </div>
+
+          <el-card>
+            <el-table :data="driverStore.selectedDriver?.rfids">
+              <el-table-column prop="number" label="RFID" />
+              <el-table-column label="Actions" width="120" align="center">
+                <template #default="{ row }">
+                  <div class="flex items-center justify-center gap-2">
+                    <el-button 
+                      type="primary" 
+                      text
+                      @click="showEditRfid(row)"
+                    >
+                      <span class="material-icons-outlined">edit</span>
+                    </el-button>
+                    <el-button 
+                      type="danger" 
+                      text
+                      @click="handleDeleteRfid(row)"
+                    >
+                      <span class="material-icons-outlined">delete_outline</span>
+                    </el-button>
+                  </div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
+        </el-tab-pane>
       </el-tabs>
     </div>
 
@@ -391,6 +501,27 @@ async function handleDeleteLicensePlate(plate: any) {
         <el-button @click="licensePlateDialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleLicensePlateSubmit">
           {{ editingLicensePlate ? 'Update' : 'Create' }}
+        </el-button>
+      </template>
+    </el-dialog>
+
+    <!-- RFID Dialog -->
+    <el-dialog
+      v-model="rfidDialogVisible"
+      :title="editingRfid ? 'Edit RFID' : 'Add RFID'"
+      width="500px"
+    >
+      <div class="p-6">
+        <el-form :model="rfidForm" label-position="top">
+          <el-form-item label="RFID" required>
+            <el-input v-model="rfidForm.number" />
+          </el-form-item>
+        </el-form>
+      </div>
+      <template #footer>
+        <el-button @click="rfidDialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="handleRfidSubmit">
+          {{ editingRfid ? 'Update' : 'Create' }}
         </el-button>
       </template>
     </el-dialog>

@@ -13,6 +13,7 @@ interface IDriver {
 }
 
 const mockDrivers: IDriver[] = Array(20).fill(null).map((_, index) => ({
+  id: index + 1,
   name: index % 2 === 0 
     ? `John Doe ${index + 1}` 
     : `Jane Smith ${index + 1}`,
@@ -59,7 +60,7 @@ const router = useRouter();
 const driverStore = useDriverStore();
 
 function handleRowClick(row: any) {
-  // Create detailed driver object
+  // Create detailed driver object with the correct id from the row
   const driverDetail = {
     id: row.id,
     name: row.name,
@@ -107,6 +108,20 @@ function handleRowClick(row: any) {
         number: 'GHI78901',
         state: 'Washington',
         stateCode: 'WA'
+      }
+    ],
+    rfids: [
+      {
+        id: 1,
+        number: 'RF001234'
+      },
+      {
+        id: 2,
+        number: 'RF005678'
+      },
+      {
+        id: 3,
+        number: 'RF009012'
       }
     ]
   };

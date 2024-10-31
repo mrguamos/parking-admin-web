@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useDriverStore } from '@/stores/driver';
 
 interface IDriver {
   name: string;
@@ -52,6 +54,35 @@ const paginatedDrivers = computed(() => {
 function handlePageChange(page: number) {
   currentPage.value = page;
 }
+
+const router = useRouter();
+const driverStore = useDriverStore();
+
+function handleRowClick(row: any) {
+  // Create detailed driver object
+  const driverDetail = {
+    id: row.id,
+    name: row.name,
+    totalPaid: 1500.66,
+    numberOfReservations: 12,
+    amountOverdue: 198.00,
+    numberOfTrucks: 12,
+    reservations: [
+      {
+        licensePlate: 'JKK12523423',
+        title: 'Cbwork Walnut',
+        duration: '2 Hours',
+        date: '5/14/2024 10:10 AM',
+        total: 20,
+        overdueFine: 55.56
+      },
+      // Add more reservations as needed
+    ]
+  };
+  
+  driverStore.setSelectedDriver(driverDetail);
+  router.push(`/drivers/${row.id}`);
+}
 </script>
 
 <template>
@@ -71,7 +102,11 @@ function handlePageChange(page: number) {
     </div>
 
     <el-card v-loading="loading">
-      <el-table :data="paginatedDrivers">
+      <el-table 
+        :data="paginatedDrivers"
+        @row-click="handleRowClick"
+        class="cursor-pointer"
+      >
         <el-table-column prop="name" label="Name" />
         <el-table-column prop="email" label="Email" />
         <el-table-column prop="phone" label="Phone" />
@@ -93,13 +128,6 @@ function handlePageChange(page: number) {
           </template>
         </el-table-column>
         <el-table-column prop="lastActivity" label="Last Activity" />
-        <el-table-column label="Actions">
-          <template #default="{ row }">
-            <el-button type="primary" text>
-              View Details
-            </el-button>
-          </template>
-        </el-table-column>
       </el-table>
 
       <div class="flex justify-end mt-4">

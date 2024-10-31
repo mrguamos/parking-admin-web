@@ -107,5 +107,14 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 				},
 			}
 		],
+	},
+	{
+		path: '/drivers/:id',
+		name: 'DriverDetails',
+		component: async () => await import('@views/drivers/driver-details.vue'),
+		meta: {
+			title: 'Driver Details',
+			hidden: true
+		}
 	}
 ];

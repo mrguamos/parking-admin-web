@@ -44,9 +44,9 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 		},
 	},
 	{
-		path: '/drivers',
-		name: 'Drivers',
-		component: async () => await import('@views/drivers/drivers-list.vue'),
+		path: '/parkers',
+		name: 'Parkers',
+		component: async () => await import('@views/parkers/parkers-list.vue'),
 		meta: {
 			title: 'Parker Accounts',
 			titleKey: 'menus.Parker_Accounts',
@@ -109,11 +109,11 @@ export const uiDesignRouters: RouteRecordRaw[] = [
 		],
 	},
 	{
-		path: '/drivers/:id',
-		name: 'DriverDetails',
-		component: async () => await import('@views/drivers/driver-details.vue'),
+		path: '/parkers/:id',
+		name: 'ParkerDetails',
+		component: async () => await import('@views/parkers/parker-details.vue'),
 		meta: {
-			title: 'Driver Details',
+			title: 'Parker Details',
 			hidden: true
 		}
 	}

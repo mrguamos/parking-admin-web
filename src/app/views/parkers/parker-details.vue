@@ -36,7 +36,7 @@ function handlePageChange(page: number) {
 }
 
 function handleBack() {
-  router.push('/drivers');
+  router.push('/parkers');
 }
 
 function formatDate(dateString: string) {

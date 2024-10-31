@@ -127,17 +127,17 @@ function handleRowClick(row: any) {
   };
   
   driverStore.setSelectedDriver(driverDetail);
-  router.push(`/drivers/${row.id}`);
+  router.push(`/parkers/${row.id}`);
 }
 </script>
 
 <template>
   <div class="p-6">
     <div class="mb-6">
-      <h2 class="text-xl font-semibold mb-4">Driver Profiles</h2>
+      <h2 class="text-xl font-semibold mb-4">Parker Accounts</h2>
       <el-input
         v-model="searchText"
-        placeholder="Search drivers..."
+        placeholder="Search accounts..."
         class="w-full"
         clearable
       >

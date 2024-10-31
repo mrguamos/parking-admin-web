@@ -1,112 +1,102 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { driverApi } from '@/apis/driverApi';
-import { useDriverStore } from '@/stores/driver';
-import { IUpdateDriverDto } from '@/models/driver/driver.interface';
-import { ElMessageBox } from 'element-plus';
+import { ref, computed } from 'vue';
 
-const router = useRouter();
-const driverStore = useDriverStore();
-const drivers = ref<IUpdateDriverDto[]>([]);
+interface IDriver {
+  name: string;
+  email: string;
+  phone: string;
+  status: 'Active' | 'Inactive';
+  accountOverdue: number;
+  lastActivity: string;
+}
+
+const mockDrivers: IDriver[] = Array(20).fill(null).map((_, index) => ({
+  name: index % 2 === 0 
+    ? `John Doe ${index + 1}` 
+    : `Jane Smith ${index + 1}`,
+  email: index % 2 === 0 
+    ? `john${index + 1}@gmail.com` 
+    : `jane${index + 1}@gmail.com`,
+  phone: `714-366-${String(5585 + index).padStart(4, '0')}`,
+  status: index % 5 === 0 ? 'Inactive' : 'Active',
+  accountOverdue: index % 3 === 0 ? (index + 1) * 15.50 : 0,
+  lastActivity: new Date(2024, 0, 15 - index)
+    .toISOString()
+    .split('T')[0]
+}));
+
 const loading = ref(false);
-const total = ref(0);
 const currentPage = ref(1);
 const pageSize = ref(10);
 const searchText = ref('');
 
-async function fetchDrivers() {
-  loading.value = true;
-  try {
-    // Simulate API call with mock data
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    drivers.value = driverStore.mockDrivers;
-    total.value = driverStore.mockDrivers.length;
-
-    // Keep the API call structure for future use
-    // const response = await driverApi.getAllDrivers({
-    //   pageIndex: currentPage.value,
-    //   pageSize: pageSize.value,
-    //   searchText: searchText.value
-    // });
-    // drivers.value = response.data.data;
-    // total.value = response.data.total;
-  } finally {
-    loading.value = false;
-  }
-}
-
-async function handleDelete(driver: IUpdateDriverDto) {
-  try {
-    await ElMessageBox.confirm(
-      'Are you sure you want to delete this driver?',
-      'Warning',
-      {
-        type: 'warning'
-      }
+const filteredDrivers = computed(() => {
+  let filtered = mockDrivers;
+  if (searchText.value) {
+    const search = searchText.value.toLowerCase();
+    filtered = mockDrivers.filter(driver => 
+      driver.name.toLowerCase().includes(search) ||
+      driver.email.toLowerCase().includes(search) ||
+      driver.phone.toLowerCase().includes(search)
     );
-    // Use store for delete operation
-    driverStore.mockDrivers = driverStore.mockDrivers.filter(d => d.id !== driver.id);
-    await fetchDrivers();
-  } catch {
-    // User cancelled deletion
   }
-}
-
-onMounted(() => {
-  fetchDrivers();
+  return filtered;
 });
+
+const paginatedDrivers = computed(() => {
+  const start = (currentPage.value - 1) * pageSize.value;
+  const end = start + pageSize.value;
+  return filteredDrivers.value.slice(start, end);
+});
+
+function handlePageChange(page: number) {
+  currentPage.value = page;
+}
 </script>
 
 <template>
   <div class="p-6">
-    <div class="mb-6 flex items-center justify-between">
-      <h2 class="text-xl font-semibold">Driver Profiles</h2>
-      <el-button type="primary" @click="router.push('/drivers/form')">
-        <span class="material-icons-outlined mr-2">add</span>
-        Add Driver
-      </el-button>
+    <div class="mb-6">
+      <h2 class="text-xl font-semibold mb-4">Driver Profiles</h2>
+      <el-input
+        v-model="searchText"
+        placeholder="Search drivers..."
+        class="w-full"
+        clearable
+      >
+        <template #prefix>
+          <span class="material-icons-outlined">search</span>
+        </template>
+      </el-input>
     </div>
 
-    <el-card>
-      <div class="mb-4">
-        <el-input
-          v-model="searchText"
-          placeholder="Search drivers..."
-          class="w-64"
-          clearable
-          @clear="fetchDrivers"
-          @keyup.enter="fetchDrivers"
-        >
-          <template #prefix>
-            <span class="material-icons-outlined">search</span>
-          </template>
-        </el-input>
-      </div>
-
-      <el-table 
-        v-loading="loading"
-        :data="drivers"
-      >
-        <el-table-column prop="firstName" label="First Name" />
-        <el-table-column prop="lastName" label="Last Name" />
+    <el-card v-loading="loading">
+      <el-table :data="paginatedDrivers">
+        <el-table-column prop="name" label="Name" />
         <el-table-column prop="email" label="Email" />
-        <el-table-column prop="phoneNumber" label="Phone Number" />
-        <el-table-column label="Actions" width="200">
+        <el-table-column prop="phone" label="Phone" />
+        <el-table-column prop="status" label="Status">
           <template #default="{ row }">
-            <el-button 
-              type="primary" 
-              text
-              @click="router.push(`/drivers/${row.id}/form`)"
-            >
-              <span class="material-icons-outlined">edit</span>
-            </el-button>
-            <el-button 
-              type="danger" 
-              text
-              @click="handleDelete(row)"
-            >
-              <span class="material-icons-outlined">delete</span>
+            <el-tag type="success" v-if="row.status === 'Active'">
+              {{ row.status }}
+            </el-tag>
+            <el-tag type="danger" v-else>
+              {{ row.status }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="Account Overdue">
+          <template #default="{ row }">
+            <span :class="row.accountOverdue > 0 ? 'text-red-500' : ''">
+              ${{ row.accountOverdue.toFixed(2) }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="lastActivity" label="Last Activity" />
+        <el-table-column label="Actions">
+          <template #default="{ row }">
+            <el-button type="primary" text>
+              View Details
             </el-button>
           </template>
         </el-table-column>
@@ -116,8 +106,8 @@ onMounted(() => {
         <el-pagination
           v-model:current-page="currentPage"
           v-model:page-size="pageSize"
-          :total="total"
-          @current-change="fetchDrivers"
+          :total="filteredDrivers.length"
+          @current-change="handlePageChange"
         />
       </div>
     </el-card>

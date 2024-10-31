@@ -154,7 +154,9 @@
             :on-change="handleUploadChange"
             :on-remove="handleRemove"
             :file-list="formData.images"
-            class="w-full flex justify-center"
+            :preview-src-list="[]"
+            :show-file-list="true"
+            class="w-full flex justify-center upload-component"
           >
             <template #default>
               <div class="text-center">
@@ -219,6 +221,30 @@
     </el-form>
   </div>
 </template>
+
+<style lang="scss" scoped>
+:deep(.upload-component) {
+  .el-upload-list__item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .el-upload-list__item-preview {
+      display: none !important;
+    }
+
+    .el-upload-list__item-delete {
+      position: static !important;
+      margin: 0 !important;
+      height: 100%;
+      width: 100%;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+</style>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';

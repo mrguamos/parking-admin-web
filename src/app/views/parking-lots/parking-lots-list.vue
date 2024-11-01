@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { useParkingLotStore } from '@/stores/parking-lot';
 import type { IParkingLotForm } from '@/models/parking/parking-lot.interface';
 import parkingLotImage from '@assets/img/parking-lot.jpg';
+import qrCodeImage from '@assets/img/qr.png';
 
 const router = useRouter();
 const parkingLotStore = useParkingLotStore();
@@ -91,6 +92,78 @@ function handleEdit(lot: IParkingLotForm) {
 function handleDelete(lot: IParkingLotForm) {
   // Implement delete functionality
 }
+
+// Add QR code modal state and handler
+const qrDialogVisible = ref(false);
+const selectedLotName = ref('');
+
+function handleShowQR(lot: IParkingLotForm) {
+  selectedLotName.value = lot.name;
+  qrDialogVisible.value = true;
+}
+
+function handleDownloadQR() {
+  // Create a link element
+  const link = document.createElement('a');
+  link.href = qrCodeImage;
+  link.download = `${selectedLotName.value.replace(/\s+/g, '-').toLowerCase()}-qr.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function handlePrintQR() {
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  
+  const doc = iframe.contentWindow?.document;
+  if (doc) {
+    doc.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Print QR Code</title>
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              font-family: Arial, sans-serif;
+            }
+            .timestamp {
+              position: absolute;
+              top: 20px;
+              left: 20px;
+              color: #666;
+              font-size: 12px;
+            }
+            .qr-code {
+              width: 400px;
+              height: 400px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="timestamp">${new Date().toLocaleString()}</div>
+          <img src="${qrCodeImage}" alt="QR Code" class="qr-code">
+        </body>
+      </html>
+    `);
+    doc.close();
+
+    iframe.onload = () => {
+      iframe.contentWindow?.print();
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+      }, 100);
+    };
+  }
+}
 </script>
 
 <template>
@@ -158,18 +231,28 @@ function handleDelete(lot: IParkingLotForm) {
               <div class="text-sm text-gray-500">
                 {{ lot.city }}, {{ lot.state }}
               </div>
-              <div class="flex gap-2">
+              <div class="flex">
                 <el-button 
-                  type="primary" 
-                  text
-                  @click="handleEdit(lot)"
+                  type="primary"
+                  @click="handleShowQR(lot)"  
+                  text 
+                  circle
+                >
+                  <span class="material-icons-outlined">qr_code</span>
+                </el-button>
+                <el-button 
+                  type="primary"
+                  @click="handleEdit(lot)"  
+                  text 
+                  circle
                 >
                   <span class="material-icons-outlined">edit</span>
                 </el-button>
                 <el-button 
-                  type="danger" 
-                  text
-                  @click="handleDelete(lot)"
+                  type="primary"
+                  @click="handleDelete(lot)"  
+                  text 
+                  circle
                 >
                   <span class="material-icons-outlined">delete</span>
                 </el-button>
@@ -188,5 +271,46 @@ function handleDelete(lot: IParkingLotForm) {
         @current-change="handlePageChange"
       />
     </div>
+
+    <!-- Add QR Code Dialog -->
+    <el-dialog
+      v-model="qrDialogVisible"
+      title="QR Code"
+      width="400px"
+      class="qr-dialog"
+      :show-close="true"
+    >
+      <div class="flex flex-col items-center p-4">
+        <h3 class="text-lg font-medium mb-6">Scan to Pay</h3>
+        <img 
+          :src="qrCodeImage" 
+          alt="QR Code"
+          class="w-64 h-64 mb-10"
+        />
+       
+        
+        <div class="flex gap-4 w-full">
+          <el-button 
+            class="flex-1"
+            @click="handlePrintQR"
+          >
+            Print
+          </el-button>
+          <el-button 
+            type="primary"
+            class="flex-1"
+            @click="handleDownloadQR"
+          >
+            Download
+          </el-button>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
+
+<style scoped>
+.qr-dialog :deep(.el-dialog__header) {
+  margin-right: 0;
+}
+</style>

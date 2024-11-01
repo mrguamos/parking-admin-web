@@ -7,6 +7,7 @@ import { popup } from '@utils/popup';
 import { useI18n } from 'vue-i18n';
 import { session } from '@services/session.service';
 import { map } from 'lodash-es';
+import Logo from '@assets/svg/parking-logo.svg';
 
 const logining = ref(false);
 const data = ref<ILoginParams>({
@@ -41,6 +42,9 @@ const sign = () => {
 <template>
 	<div class="flex justify-center items-center w-full min-h-[100vh]">
 		<form class="w-[400px]">
+			<div class="mb-10 w-full">
+				<Logo class="mx-auto h-20 w-20" />
+			</div>
 			<div class="mb-3 w-full">
 				<el-input v-model="data.username" class="w-full" :placeholder="t('login.User_Name')" />
 			</div>

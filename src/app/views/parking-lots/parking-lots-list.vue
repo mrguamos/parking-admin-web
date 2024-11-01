@@ -24,8 +24,10 @@ const mockParkingLots: IParkingLotForm[] = Array(20).fill(null).map((_, index) =
   dockStart: `${10 + (index * 2)}`,
   dockEnd: `${11 + (index * 2)}`,
   operatingRate: '250',
-  gracePeriod: '2',
-  gracePeriodUnit: 'Minutes',
+  gracePeriod: {
+    hours: '2',
+    minutes: '0'
+  },
   reservedDocks: [`${24 + index}`],
   rates: {
     hourly: true,

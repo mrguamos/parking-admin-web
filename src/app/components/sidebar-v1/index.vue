@@ -4,11 +4,11 @@
 	<div class="unis-sidebar" :class="[isCollapse ? 'unis-sidebar__collapse' : null]">
 		<div class="unis-sidebar-head" :class="[isCollapse ? 'unis-sidebar-head__collapse' : null]">
 			<div class="logo-top flex items-center text-tiny-uppercase">
-				<logo class="text-brand-foreground"></logo>
+				<Logo class="h-10 w-auto" />
 			</div>
 			<div v-if="!isCollapse" class="logo-info">
 					Cubework Parking
-				</div>
+			</div>
 			<div>
 				<template v-if="!isCollapse">
 					<el-button
@@ -54,7 +54,7 @@ import { ref, computed } from 'vue';
 import { router, navigation } from '@/routers/index.ts';
 import MenuItem from './components/menu-item.vue';
 
-import Logo from '@assets/svg/layout/logo.svg';
+import Logo from '@assets/svg/parking-logo.svg';
 import IconSidebarCollapse from '@assets/svg/layout/SidebarCollapse.svg';
 import IconSidebarExpand from '@assets/svg/layout/SidebarExpand.svg';
 

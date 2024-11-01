@@ -67,14 +67,32 @@
           <el-form-item label="Total Spaces" class="md:col-span-2">
             <div class="text-gray-700">{{ totalSpaces }} spaces</div>
           </el-form-item>
+        </div>
+      </div>
 
-          <el-form-item label="Grace Period">
-            <el-input v-model="formData.gracePeriod" />
+      <!-- Grace Period -->
+      <div>
+        <h3 class="text-lg font-medium mb-4">GRACE PERIOD</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <el-form-item label="Hours">
+            <el-select v-model="formData.gracePeriod.hours" class="w-full" placeholder="Select hours">
+              <el-option
+                v-for="hour in 24"
+                :key="hour - 1"
+                :label="hour"
+                :value="hour"
+              />
+            </el-select>
           </el-form-item>
 
-          <el-form-item label="Unit">
-            <el-select v-model="formData.gracePeriodUnit" class="w-full">
-              <el-option label="Minutes" value="Minutes" />
+          <el-form-item label="Minutes">
+            <el-select v-model="formData.gracePeriod.minutes" class="w-full" placeholder="Select minutes">
+              <el-option
+                v-for="minute in 60"
+                :key="minute - 1"
+                :label="minute"
+                :value="minute"
+              />
             </el-select>
           </el-form-item>
         </div>
@@ -275,8 +293,10 @@ const formData = ref<IParkingLotForm>({
   dockStart: '',
   dockEnd: '',
   operatingRate: '',
-  gracePeriod: '2',
-  gracePeriodUnit: 'Minutes',
+  gracePeriod: {
+    hours: '0',
+    minutes: '0'
+  },
   reservedDocks: [''],
   rates: {
     hourly: true,

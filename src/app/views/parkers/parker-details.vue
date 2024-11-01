@@ -359,17 +359,19 @@ async function handleDeleteRfid(rfid: any) {
               <el-table-column prop="stateCode" label="State Code" />
               <el-table-column label="">
                 <template #default="{ row }">
-                  <div class="flex items-center justify-end gap-1">
+                  <div class="flex items-center justify-end">
                     <el-button 
                       type="primary" 
-                      text
+                      text 
+                      circle
                       @click="showEditLicensePlate(row)"
                     >
                       <span class="material-icons-outlined">edit</span>
                     </el-button>
                     <el-button 
                       type="danger" 
-                      text
+                      text 
+                      circle
                       @click="handleDeleteLicensePlate(row)"
                     >
                       <span class="material-icons-outlined">delete_outline</span>
@@ -397,6 +399,7 @@ async function handleDeleteRfid(rfid: any) {
                     <el-button 
                       type="primary" 
                       text
+                      circle
                       @click="showEditRfid(row)"
                     >
                       <span class="material-icons-outlined">edit</span>
@@ -404,6 +407,7 @@ async function handleDeleteRfid(rfid: any) {
                     <el-button 
                       type="danger" 
                       text
+                      circle
                       @click="handleDeleteRfid(row)"
                     >
                       <span class="material-icons-outlined">delete_outline</span>

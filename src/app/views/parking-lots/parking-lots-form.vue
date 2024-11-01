@@ -107,14 +107,14 @@
         <div class="space-y-4">
           <div v-for="(dock, index) in formData.reservedDocks" :key="index" 
                class="flex items-center gap-4">
-            <el-form-item label="Dock Number" class="w-40">
-              <el-input v-model="formData.reservedDocks[index]" placeholder="Enter dock number" />
+            <el-form-item label="Dock Number" class="w-52">
+              <el-input type="number" :min="formData.dockStart" :max="formData.dockEnd" v-model="formData.reservedDocks[index]" placeholder="Enter dock number" />
             </el-form-item>
-            <div class="flex items-center gap-2">
-              <el-button type="primary" text>
+            <div class="flex items-center">
+              <el-button type="primary" text circle>
                 <span class="material-icons-outlined">edit</span>
               </el-button>
-              <el-button type="danger" text @click="removeDock(index)">
+              <el-button type="danger" text circle @click="removeDock(index)">
                 <span class="material-icons-outlined">delete</span>
               </el-button>
             </div>

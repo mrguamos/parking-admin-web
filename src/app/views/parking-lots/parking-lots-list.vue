@@ -142,15 +142,26 @@ function handlePrintQR() {
               color: #666;
               font-size: 12px;
             }
+            .title {
+              font-size: 24px;
+              font-weight: 500;
+              margin-bottom: 40px;
+            }
             .qr-code {
               width: 400px;
               height: 400px;
+            }
+            .footer {
+              font-size: 18px;
+              margin-top: 40px;
             }
           </style>
         </head>
         <body>
           <div class="timestamp">${new Date().toLocaleString()}</div>
+          <div class="title">Scan to Pay</div>
           <img src="${qrCodeImage}" alt="QR Code" class="qr-code">
+          <div class="footer">PARKING EZ</div>
         </body>
       </html>
     `);

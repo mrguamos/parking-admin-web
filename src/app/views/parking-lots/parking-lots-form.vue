@@ -59,13 +59,13 @@
             <el-input v-model="formData.dockEnd" type="number" />
           </el-form-item>
 
+          <el-form-item label="Operating Rate ($)">
+            <el-input v-model="formData.operatingRate" />
+          </el-form-item>
+
           <!-- Display total spaces -->
           <el-form-item label="Total Spaces" class="md:col-span-2">
             <div class="text-gray-700">{{ totalSpaces }} spaces</div>
-          </el-form-item>
-
-          <el-form-item label="Operating Rate ($)">
-            <el-input v-model="formData.operatingRate" />
           </el-form-item>
 
           <el-form-item label="Grace Period">

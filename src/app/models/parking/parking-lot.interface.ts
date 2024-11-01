@@ -11,8 +11,10 @@ export interface IParkingLotForm {
   dockStart: string;
   dockEnd: string;
   operatingRate: string;
-  gracePeriod: string;
-  gracePeriodUnit: string;
+  gracePeriod: {
+    hours: string;
+    minutes: string;
+  };
   reservedDocks: string[];
   rates: {
     hourly: boolean;

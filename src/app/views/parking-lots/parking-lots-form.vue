@@ -75,25 +75,25 @@
         <h3 class="text-lg font-medium mb-4">GRACE PERIOD</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <el-form-item label="Hours">
-            <el-select v-model="formData.gracePeriod.hours" class="w-full" placeholder="Select hours">
-              <el-option
-                v-for="hour in 24"
-                :key="hour - 1"
-                :label="hour"
-                :value="hour"
-              />
-            </el-select>
+            <el-input 
+              v-model="formData.gracePeriod.hours" 
+              type="number" 
+              min="0"
+              max="23"
+              placeholder="Enter hours"
+              class="w-full"
+            />
           </el-form-item>
 
           <el-form-item label="Minutes">
-            <el-select v-model="formData.gracePeriod.minutes" class="w-full" placeholder="Select minutes">
-              <el-option
-                v-for="minute in 60"
-                :key="minute - 1"
-                :label="minute"
-                :value="minute"
-              />
-            </el-select>
+            <el-input 
+              v-model="formData.gracePeriod.minutes" 
+              type="number"
+              min="0"
+              max="59"
+              placeholder="Enter minutes"
+              class="w-full"
+            />
           </el-form-item>
         </div>
       </div>

@@ -395,7 +395,7 @@ async function handleDeleteRfid(rfid: any) {
               <el-table-column prop="number" label="RFID" />
               <el-table-column label="">
                 <template #default="{ row }">
-                  <div class="flex items-center justify-end gap-1">
+                  <div class="flex items-center justify-end">
                     <el-button 
                       type="primary" 
                       text
